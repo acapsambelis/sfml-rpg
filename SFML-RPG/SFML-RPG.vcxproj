@@ -144,7 +144,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="Draw.h" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="World.cpp" />
+    <ClCompile Include="worldObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="World.h" />
+    <ClInclude Include="worldObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="player_texture.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
