@@ -1,16 +1,22 @@
-#include "worldObject.h"
+#include "WorldObject.h"
 
-WorldObject::WorldObject(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
+WorldObject::WorldObject(sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
+	float switchTime, float weight, sf::Vector2f position) :
+	animation(texture, frozen, imageCount, switchTime)
 {
-	body.setSize(size);
-	body.setOrigin(size / 2.0f);
+	body.setSize(sizeScalar * sf::Vector2f(texture->getSize()));
+	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(position);
+	this->weight = weight;
+	row = 0;
+	faceRight = true;
 }
 
 WorldObject::~WorldObject()
 {
 }
+
 
 void WorldObject::Draw(sf::RenderWindow& window)
 {

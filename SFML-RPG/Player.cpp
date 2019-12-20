@@ -2,18 +2,11 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 
-Player::Player(sf::Texture* texture, bool frozen, sf::Vector2u imageCount,
-	float switchTime, float speed) :
-	animation(texture, frozen, imageCount, switchTime)
+Player::Player(sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
+	float switchTime, float weight, sf::Vector2f position, float speed) :
+	WorldObject(texture, sizeScalar, frozen, imageCount, switchTime, weight, position)
 {
 	this->speed = speed;
-	row = 0;
-	faceRight = true;
-
-	body.setSize(sf::Vector2f(100.0f, 100.0f));
-	body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(206.0f, 206.0f);
-	body.setTexture(texture);
 }
 
 Player::~Player()
@@ -54,7 +47,3 @@ void Player::Update(float deltaTime)
 
 }
 
-void Player::Draw(sf::RenderWindow& window)
-{
-	window.draw(body);
-}

@@ -1,9 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "worldObject.h"
+#include "WorldObject.h"
 #include "World.h"
 
-#include "Draw.h"
 
 
 int main()
@@ -22,13 +21,17 @@ int main()
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("ImageRec/player_texture.png");
 
-	Player player(&playerTexture, true, sf::Vector2u(1, 1), 0.3f, 200.0f);
+
+	Player player(&playerTexture, 2, true, sf::Vector2u(1, 1), 0.0f, 100.0f,
+		sf::Vector2f(250.0f, 250.0f), 200.0f);
 
 	sf::Texture boxTexture;
 	boxTexture.loadFromFile("ImageRec/box.png");
-	WorldObject obstacle1(&boxTexture, sf::Vector2f(100.0f, 100.0f), sf::Vector2f(500.0f, 200.0f));
-	WorldObject obstacle2(&boxTexture, sf::Vector2f(100.0f, 100.0f), sf::Vector2f(500.0f, 0.0f));
 
+	WorldObject immove(&boxTexture, 2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 100.0f, sf::Vector2f(500.0f, 200.0f));
+	WorldObject move(&boxTexture, 2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 100.0f, sf::Vector2f(500.0f, 0.0f));
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -52,21 +55,26 @@ int main()
 
 
 		player.Update(deltaTime);
-		Collider coll = player.GetCollider();
-		Collider obs1 = obstacle1.GetCollider();
-		Collider obs2 = obstacle2.GetCollider();
+		Collider playc = player.GetCollider();
+		Collider imvc = immove.GetCollider();
+		Collider mvc = move.GetCollider();
 
-		obstacle1.GetCollider().CheckCollision(coll, 1.0f);
-		obstacle1.GetCollider().CheckCollision(obs2, 1.0f);
-		obstacle2.GetCollider().CheckCollision(coll, 0.0f);
-		obstacle2.GetCollider().CheckCollision(obs1, 0.0f);
-
+		imvc.CheckCollision(playc, 1.0f);
+		imvc.CheckCollision(mvc, 1.0f);
+		mvc.CheckCollision(playc, 0.0f);
+		mvc.CheckCollision(imvc, 1.0f);
 
 		view.setCenter(player.GetPosition());
-		DrawScr(window, view, wrld, player, obstacle1, obstacle2);
+
+		window.clear(sf::Color(150, 150, 150));
+		window.setView(view);
+		wrld.Draw(window);
+		player.Draw(window);
+		immove.Draw(window);
+		move.Draw(window);
+		window.display();
 
 	}
 
-
 	return 0;
-};
+}
