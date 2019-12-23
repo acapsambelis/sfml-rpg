@@ -61,5 +61,8 @@
     <Image Include="ImageRec\ground_terrain.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ImageRec\iron_box.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

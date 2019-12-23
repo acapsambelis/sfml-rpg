@@ -161,6 +161,7 @@
   <ItemGroup>
     <Image Include="ImageRec\box.png" />
     <Image Include="ImageRec\ground_terrain.png" />
+    <Image Include="ImageRec\iron_box.png" />
     <Image Include="ImageRec\player_texture.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

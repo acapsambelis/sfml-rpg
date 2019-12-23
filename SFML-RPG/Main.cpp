@@ -21,17 +21,20 @@ int main()
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("ImageRec/player_texture.png");
 
-
-	Player player(&playerTexture, 2, true, sf::Vector2u(1, 1), 0.0f, 100.0f,
+	Player player(&playerTexture, 2, true, sf::Vector2u(1, 1), 0.0f, 
+		/*strength*/ 1.0f,
+		/*weight*/ 0.5f,
 		sf::Vector2f(250.0f, 250.0f), 200.0f);
 
 	sf::Texture boxTexture;
 	boxTexture.loadFromFile("ImageRec/box.png");
+	sf::Texture ironBoxTexture;
+	ironBoxTexture.loadFromFile("ImageRec/iron_box.png");
 
-	WorldObject immove(&boxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 100.0f, sf::Vector2f(500.0f, 200.0f));
+	WorldObject immove(&ironBoxTexture, 2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 0.0f, 1.0f, sf::Vector2f(500.0f, 200.0f));
 	WorldObject move(&boxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 100.0f, sf::Vector2f(500.0f, 0.0f));
+		0.0f, 0.0f, 0.0f, sf::Vector2f(500.0f, 0.0f));
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -59,10 +62,15 @@ int main()
 		Collider imvc = immove.GetCollider();
 		Collider mvc = move.GetCollider();
 
-		imvc.CheckCollision(playc, 1.0f);
-		imvc.CheckCollision(mvc, 1.0f);
-		mvc.CheckCollision(playc, 0.0f);
-		mvc.CheckCollision(imvc, 1.0f);
+		Collider worldColliders[2] = { imvc, mvc };
+		Collider one[1] = { imvc };
+		Collider two[1] = { mvc };
+
+
+		playc.UpdateCollision(mvc, one, 1);
+		playc.UpdateCollision(imvc, two, 1);
+
+
 
 		view.setCenter(player.GetPosition());
 

@@ -3,8 +3,8 @@
 #include "Animation.h"
 
 Player::Player(sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
-	float switchTime, float weight, sf::Vector2f position, float speed) :
-	WorldObject(texture, sizeScalar, frozen, imageCount, switchTime, weight, position)
+	float switchTime, float strength, float weight, sf::Vector2f position, float speed) :
+	WorldObject(texture, sizeScalar, frozen, imageCount, switchTime, strength, weight, position)
 {
 	this->speed = speed;
 }
