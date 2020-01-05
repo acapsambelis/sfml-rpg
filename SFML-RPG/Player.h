@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
-#include "Collider.h"
 
 #include "WorldObject.h"
 

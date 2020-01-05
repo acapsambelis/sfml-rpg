@@ -36,12 +36,12 @@ int main()
 		0.0f, 1.0f, sf::Vector2f(500.0f, 200.0f));
 	worldItems.push_back(immove);
 	
-	WorldObject move(2u, &boxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 0.0f, sf::Vector2f(500.0f, 0.0f));
+	WorldObject move(2u, &ironBoxTexture, 2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 1.0f, sf::Vector2f(500.0f, 0.0f));
 	worldItems.push_back(move);
 	
-	WorldObject move2(3u, &boxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 0.0f, sf::Vector2f(500.0f, 100.0f));
+	WorldObject move2(3u, &ironBoxTexture, 2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 1.0f, sf::Vector2f(500.0f, 100.0f));
 	worldItems.push_back(move2);
 
 
