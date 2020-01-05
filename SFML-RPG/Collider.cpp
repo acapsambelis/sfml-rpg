@@ -1,9 +1,11 @@
 #include "Collider.h"
+#include <vector>
 #include <iostream>
 
-Collider::Collider(sf::RectangleShape& body, float strength, float weight) :
+Collider::Collider(unsigned int id, sf::RectangleShape& body, float weight) :
 	body(body)
 {
+	this->ID = id;
 	this->weight = weight;
 }
 
@@ -11,25 +13,31 @@ Collider::~Collider()
 {
 }
 
-void Collider::UpdateCollision(Collider& other, Collider whitelist [], int objects)
+void Collider::UpdateCollision(Collider& other, std::vector<Collider> itemList)
 {
+	std::cout << "Checking" << std::endl;
+	
 	sf::Vector3f collisionDir = this->CheckCollision(other);
 	if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
 	{
 		this->Bounce(other, collisionDir);
-		for (int i = 0; i < objects; ++i)
+		for (unsigned int i = 0; i < itemList.size(); ++i)
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-				std::cout << "Breakpoint" << std::endl;
-			sf::Vector3f otherCollision = other.CheckCollision(whitelist[i]);
-			if (otherCollision != sf::Vector3f(0.0f, 0.0f, 0.0f))
+			if (other.ID != itemList[i].ID)
 			{
-				other.Bounce(whitelist[i], otherCollision);
-				collisionDir = this->CheckCollision(other);
-				this->Bounce(other, collisionDir, whitelist[i].weight);
+				//Collider itemColl = itemList[i].GetCollider();
+				sf::Vector3f otherCollision = other.CheckCollision(itemList[i]);
+				if (otherCollision != sf::Vector3f(0.0f, 0.0f, 0.0f))
+				{
+					other.Bounce(itemList[i], otherCollision);
+					collisionDir = this->CheckCollision(other);
+					this->Bounce(other, collisionDir, itemList[i].weight);
+				}
+
 			}
 		}
 	}
+	
 }
 
 sf::Vector3f Collider::CheckCollision(Collider& other)
@@ -69,6 +77,8 @@ void Collider::Bounce(Collider& other, sf::Vector3f react, float weightOverride)
 {
 	if (weightOverride == -1.0f)
 		weightOverride = other.weight;
+	else
+		weightOverride = 1.0f;
 
 	other.Move(-react.z * (1.0f - weightOverride) * react.x,
 			    react.z * (1.0f - weightOverride) * react.y);

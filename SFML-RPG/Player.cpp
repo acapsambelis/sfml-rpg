@@ -2,11 +2,13 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 
-Player::Player(sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
+Player::Player(unsigned int ID, sf::RectangleShape& templat, sf::Texture* texture, 
+	float sizeScalar, bool frozen, sf::Vector2u imageCount,
 	float switchTime, float strength, float weight, sf::Vector2f position, float speed) :
-	WorldObject(texture, sizeScalar, frozen, imageCount, switchTime, strength, weight, position)
+	WorldObject(ID, texture, sizeScalar, frozen, imageCount, switchTime, weight, position)
 {
 	this->speed = speed;
+	this->strength = strength;
 }
 
 Player::~Player()
@@ -43,7 +45,7 @@ void Player::Update(float deltaTime)
 		animation.Update(row, deltaTime, faceRight);
 
 	body.setTextureRect(animation.uvRect);
-	body.move(movement);
+	Move(movement.x, movement.y);
 
 }
 

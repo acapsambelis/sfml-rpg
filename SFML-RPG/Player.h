@@ -8,7 +8,7 @@
 class Player : public WorldObject
 {
 public:
-	Player(sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
+	Player(unsigned int ID, sf::RectangleShape& templat, sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
 		float switchTime, float strength, float weight, sf::Vector2f position, float speed);
 	~Player();
 
@@ -16,5 +16,6 @@ public:
 
 private:
 	float speed;
+	float strength;
 
 };
