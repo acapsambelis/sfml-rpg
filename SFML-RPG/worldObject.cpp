@@ -35,19 +35,6 @@ void WorldObject::UpdateCollision(WorldObject& other,
 	sf::Vector3f collisionDir = this->CheckCollision(other);
 	if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
 	{
-		for (unsigned int i = 0; i < itemList.size(); ++i)
-		{
-			if (other.ID != itemList[i].ID && other.ID != this->ID)
-			{
-				if (blacklist.find(itemList[i].ID) == blacklist.end())
-				{
-					blacklist.insert(itemList[i].ID);
-					other.UpdateCollision(itemList[i], itemList, blacklist);
-				}
-
-			}
-		}
-		collisionDir = this->CheckCollision(other);
 		Bounce(other, collisionDir);
 	}
 }
