@@ -145,7 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ItemDisperse.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="World.cpp" />
@@ -153,15 +153,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="Collider.h" />
+    <ClInclude Include="ItemDisperse.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\box.png" />
+    <Image Include="ImageRec\grass_blade.png" />
     <Image Include="ImageRec\ground_terrain.png" />
     <Image Include="ImageRec\iron_box.png" />
+    <Image Include="ImageRec\pixel_grass.png" />
+    <Image Include="ImageRec\pixel_stump.png" />
     <Image Include="ImageRec\player_texture.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,13 +24,13 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WorldObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDisperse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +41,13 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WorldObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDisperse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,6 +62,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ImageRec\iron_box.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ImageRec\pixel_stump.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ImageRec\pixel_grass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ImageRec\grass_blade.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

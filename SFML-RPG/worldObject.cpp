@@ -15,12 +15,32 @@ WorldObject::WorldObject(unsigned int ID,
 	body.setPosition(position);
 
 	this->weight = weight;
-	row = 0;
-	faceRight = true;
+	this->row = 0;
+	this->faceRight = true;
 }
+
+
+WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID, 
+	sf::Vector2f position) :
+	animation(cpy.animation)
+{
+	// COPY //
+	this->ID = ID;
+
+	body.setSize(cpy.body.getSize());
+	body.setOrigin(body.getSize() / 2.0f);
+	body.setTexture(cpy.body.getTexture());
+	body.setPosition(position);
+
+	this->weight = cpy.weight;
+	this->row = 0;
+	this->faceRight = true;
+}
+
 
 WorldObject::~WorldObject()
 {
+	// DESTRUCTOR //
 }
 
 
@@ -29,8 +49,7 @@ void WorldObject::Draw(sf::RenderWindow& window)
 	window.draw(body);
 }
 
-void WorldObject::UpdateCollision(WorldObject& other, 
-	std::vector<WorldObject> itemList, std::unordered_set<unsigned int> blacklist)
+void WorldObject::UpdateCollision(WorldObject& other)
 {
 	sf::Vector3f collisionDir = this->CheckCollision(other);
 	if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))

@@ -2,7 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 
-Player::Player(unsigned int ID, sf::RectangleShape& templat, sf::Texture* texture, 
+Player::Player(unsigned int ID, sf::Texture* texture, 
 	float sizeScalar, bool frozen, sf::Vector2u imageCount,
 	float switchTime, float strength, float weight, sf::Vector2f position, float speed) :
 	WorldObject(ID, texture, sizeScalar, frozen, imageCount, switchTime, weight, position)
