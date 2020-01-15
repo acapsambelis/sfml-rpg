@@ -1,11 +1,14 @@
 #include "WorldObject.h"
-#include <iostream>
+#include "Player.h"
 
-WorldObject::WorldObject(unsigned int ID, 
-	sf::Texture* texture, float sizeScalar, bool frozen, 
-	sf::Vector2u imageCount, float switchTime, float weight, 
-	sf::Vector2f position) :
-	animation(texture, frozen, imageCount, switchTime)
+// NEW //
+WorldObject::WorldObject(const char* name, int ID,
+	sf::Texture* texture, sf::Texture* entTexture, float sizeScalar, 
+	bool frozen, sf::Vector2u imageCount, float switchTime,
+	float weight, sf::Vector2f position) :
+		//Visible(texture, sizeScalar, position),
+		animation(texture, frozen, imageCount, switchTime),
+		ent(name, entTexture)
 {
 	this->ID = ID;
 
@@ -19,12 +22,13 @@ WorldObject::WorldObject(unsigned int ID,
 	this->faceRight = true;
 }
 
-
+// COPY //
 WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID, 
 	sf::Vector2f position) :
-	animation(cpy.animation)
+		//Visible(cpy.body),
+		animation(cpy.animation),
+		ent(cpy.ent)
 {
-	// COPY //
 	this->ID = ID;
 
 	body.setSize(cpy.body.getSize());
@@ -40,7 +44,6 @@ WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID,
 
 WorldObject::~WorldObject()
 {
-	// DESTRUCTOR //
 }
 
 
@@ -49,13 +52,15 @@ void WorldObject::Draw(sf::RenderWindow& window)
 	window.draw(body);
 }
 
-void WorldObject::UpdateCollision(WorldObject& other)
+bool WorldObject::UpdateCollision(WorldObject& other)
 {
 	sf::Vector3f collisionDir = this->CheckCollision(other);
 	if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
 	{
 		Bounce(other, collisionDir);
+		return true;
 	}
+	return false;
 }
 
 sf::Vector3f WorldObject::CheckCollision(WorldObject& other)

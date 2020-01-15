@@ -1,13 +1,13 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
-#include <vector>
-#include <unordered_set>
+#include "Entity.h"
 
 class WorldObject
 {
 public:
-	WorldObject(unsigned int ID, sf::Texture* texture, float sizeScalar, bool frozen, sf::Vector2u imageCount,
+	WorldObject(const char* name, int ID, sf::Texture* texture, sf::Texture* entTexture,
+		float sizeScalar, bool frozen, sf::Vector2u imageCount,
 		float switchTime, float weight, sf::Vector2f position);
 	WorldObject(const WorldObject& cpy, unsigned int ID, sf::Vector2f position);
 	~WorldObject();
@@ -19,7 +19,7 @@ public:
 
 public:
 	// Collisions //
-	void UpdateCollision(WorldObject& other);
+	bool UpdateCollision(WorldObject& other);
 
 	sf::Vector3f CheckCollision(WorldObject& other);
 	void Bounce(WorldObject& other, sf::Vector3f react, 
@@ -29,7 +29,7 @@ public:
 
 
 public:
-	unsigned int ID;
+	int ID;
 
 	sf::RectangleShape body;
 	Animation animation;
@@ -38,5 +38,6 @@ public:
 
 	float weight;
 
-};
+	Entity ent;
 
+};

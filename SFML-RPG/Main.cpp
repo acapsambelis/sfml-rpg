@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "ItemDisperse.h"
+#include "ObjectDisperse.h"
 #include "WorldObject.h"
 #include "World.h"
+#include "Gui.h"
 
 #include <iostream>
 #include <vector>
@@ -14,79 +15,73 @@ int main()
 	sf::RenderWindow window;
 	window.create(currentMode, "Title", sf::Style::Fullscreen);
 
-	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(800, 450));
+	sf::View worldView(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(800, 450));
 
-	// PLAYER CREATION //
+	sf::View guiView(sf::Vector2f(10000.0f, 10000.0f), sf::Vector2f(800.0f, 450.0f));
+
+	// ITEMDISPERSE CREATION //
 	std::vector<WorldObject> collItems;
 	std::vector<WorldObject> worldI;
-	unsigned int ID = 0;
-
-	sf::Texture playerTexture;
-	playerTexture.loadFromFile("ImageRec/player_texture.png");
-
-	Player player(0u, &playerTexture, 2, true, sf::Vector2u(1, 1), 0.0f,
-		/*weight*/ 0.5f,
-		/*strength*/ 1.0f,
-		sf::Vector2f(250.0f, 250.0f), 200.0f);
-	worldI.push_back(player);
-	
-	// ITEMDISPERSE CREATION //
-
+	int ID = 0;
+	/**/
 	// Grass
 	sf::Texture grBlade;
 	grBlade.loadFromFile("ImageRec/grass_blade.png");
-	WorldObject grass(00u, &grBlade, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(0.0f, 150.0f));
-	ItemDisperse grs(grass, sf::Vector2f(1000, 1000), 0.5f);
+	sf::Texture grEnt;
+	grEnt.loadFromFile("ImageRec/grass_blade.png");
+
+	WorldObject grass("Grass", 00, &grBlade, &grEnt,
+		2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 1.0f, sf::Vector2f(0.0f, 0.0f));
+	ObjectDisperse grs(grass, sf::Vector2f(1000, 1000), 0.5f);
 	std::vector<WorldObject> gr = grs.Disperse(1u);
 	for (unsigned int i = 0; i < gr.size(); i++) {
 		worldI.push_back(gr[i]);
 	}
-	ID += gr.size();
+	ID += 1 + gr.size();
 
 	// Stump
-	/**/
 	sf::Texture stumpTxtr;
 	stumpTxtr.loadFromFile("ImageRec/pixel_stump.png");
-	WorldObject stump(00u, &stumpTxtr, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(0.0f, 150.0f));
-	ItemDisperse stp(stump, sf::Vector2f(1000, 1000), 0.5f);
-	std::vector<WorldObject> st = stp.Disperse(1u);
+	sf::Texture stumpEnt;
+	stumpEnt.loadFromFile("ImageRec/pixel_stump.png");
+
+	WorldObject stump("Stump", 00, &stumpTxtr, &stumpEnt,
+		2.0f, true, sf::Vector2u(1, 1),
+		0.0f, 1.0f, sf::Vector2f(0.0f, 0.0f));
+	ObjectDisperse stp(stump, sf::Vector2f(1000, 1000), 0.5f);
+	std::vector<WorldObject> st = stp.Disperse(ID);
 	for (unsigned int i = 0; i < st.size(); i++) {
 		worldI.push_back(st[i]);
 		collItems.push_back(st[i]);
 	}
-	ID += st.size();
-
-
-	// WORLDOBJECTS //
-	/*
-	sf::Texture boxTexture;
-	boxTexture.loadFromFile("ImageRec/box.png");
-	sf::Texture ironBoxTexture;
-	ironBoxTexture.loadFromFile("ImageRec/iron_box.png");
-
-	WorldObject immove(ID+1u, &ironBoxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(500.0f, 200.0f));
-	collItems.push_back(immove);
-	worldI.push_back(immove);
+	ID += 1 + st.size();
 	
-	WorldObject move(ID+2u, &ironBoxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(500.0f, 0.0f));
-	collItems.push_back(move);
-	worldI.push_back(move);
-	
-	WorldObject move2(ID+3u, &ironBoxTexture, 2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(500.0f, 100.0f));
-	collItems.push_back(move2);
-	worldI.push_back(move2);
-	*/
-
 	// WORLD CREATION //
 	sf::Texture ground;
 	ground.loadFromFile("ImageRec/pixel_grass.png");
 	World wrld(&ground, worldI, collItems);
+	
+	// PLAYER CREATION //
+	sf::Texture playerTexture;
+	playerTexture.loadFromFile("ImageRec/player_texture.png");
 
+	Player player(/*Identity*/ wrld, "Player", 0, 
+		/*Txtr & animation*/ &playerTexture, 2, true, sf::Vector2u(1, 1), 0.0f,
+		/*weight*/ 0.5f, /*strength*/ 1.0f,
+		/*Position*/ sf::Vector2f(250.0f, 250.0f), /*Speed*/ 200.0f);
+
+	// GUI CREATION //
+	/**/
+	sf::RectangleShape healthbar;
+	healthbar.setSize(sf::Vector2f(player.health, 10.0f));
+	healthbar.setPosition(9620.0f, 9800.0f);
+	healthbar.setFillColor(sf::Color(0, 0, 255));
+	sf::Vector2f pos = healthbar.getPosition();
+	
+	Gui g(healthbar);
+	g.elements.push_back(healthbar);
+	
 	float deltaTime = 0.0f;
 	sf::Clock clock;
 
@@ -102,21 +97,26 @@ int main()
 
 		for (unsigned int i = 0; i < wrld.collideables.size(); ++i)
 		{
-			player.UpdateCollision(wrld.collideables[i]);
+			player.Collide(wrld.collideables[i], wrld.collideables);
 		}
 
 		// DISPLAY //
-		view.setCenter(player.GetPosition());
-
 		window.clear(sf::Color(150, 150, 150));
-		window.setView(view);
+		/**/
+		worldView.setCenter(player.GetPosition());
+		window.setView(worldView);
 		wrld.Draw(window);
-		for (unsigned int i = 1; i < wrld.worldItems.size(); ++i)
+		for (unsigned int i = 0; i < wrld.worldItems.size(); ++i)
 		{
-			wrld.worldItems[i].Draw(window);
+			window.draw(wrld.worldItems[i].body);
 		}
 		player.Draw(window);
-
+		
+		// UI //
+		g.Update(player);
+		window.setView(guiView);
+		g.Draw(window);
+		
 		window.display();
 
 	}

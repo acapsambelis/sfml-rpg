@@ -1,13 +1,12 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "WorldObject.h"
-#include "ItemDisperse.h"
 #include <vector>
 
 class World
 {
 public:
-	World(sf::Texture* texture, std::vector<WorldObject> &worldI, 
+	World(sf::Texture* texture, std::vector<WorldObject> &worldI,
 		std::vector<WorldObject>& coll);
 	~World();
 

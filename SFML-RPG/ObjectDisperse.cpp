@@ -1,17 +1,17 @@
-#include "ItemDisperse.h"
+#include "ObjectDisperse.h"
 
-ItemDisperse::ItemDisperse(WorldObject obj, sf::Vector2f range, float num):
+ObjectDisperse::ObjectDisperse(WorldObject obj, sf::Vector2f range, float num):
 	objType(obj)
 {
 	this->range = range;
 	this->popularity = num;
 }
 
-ItemDisperse::~ItemDisperse()
+ObjectDisperse::~ObjectDisperse()
 {
 }
 
-std::vector<WorldObject> ItemDisperse::Disperse(unsigned int nextID)
+std::vector<WorldObject> ObjectDisperse::Disperse(int nextID)
 {
 	std::vector<WorldObject> items;
 

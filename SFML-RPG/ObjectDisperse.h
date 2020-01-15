@@ -3,13 +3,13 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 
-class ItemDisperse
+class ObjectDisperse
 {
 public:
-	ItemDisperse(WorldObject obj, sf::Vector2f range, float num);
-	~ItemDisperse();
+	ObjectDisperse(WorldObject obj, sf::Vector2f range, float num);
+	~ObjectDisperse();
 
-	std::vector<WorldObject> Disperse(unsigned int nextID);
+	std::vector<WorldObject> Disperse(int nextID);
 
 public:
 	WorldObject objType;
