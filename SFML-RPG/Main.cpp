@@ -23,7 +23,6 @@ int main()
 	std::vector<WorldObject> collItems;
 	std::vector<WorldObject> worldI;
 	int ID = 0;
-	/**/
 	// Grass
 	sf::Texture grBlade;
 	grBlade.loadFromFile("ImageRec/grass_blade.png");
