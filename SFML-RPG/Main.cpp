@@ -6,7 +6,7 @@
 #include "Gui.h"
 
 #include <iostream>
-#include <vector>
+#include <unordered_set>
 
 int main()
 {
@@ -20,26 +20,24 @@ int main()
 	sf::View guiView(sf::Vector2f(10000.0f, 10000.0f), sf::Vector2f(800.0f, 450.0f));
 
 	// ITEMDISPERSE CREATION //
-	std::vector<WorldObject> collItems;
-	std::vector<WorldObject> worldI;
+	std::unordered_set<WorldObject, MyHashFunction> collSet;
+	std::unordered_set<WorldObject, MyHashFunction> worldSet;
+
 	int ID = 0;
 	// Grass
 	sf::Texture grBlade;
 	grBlade.loadFromFile("ImageRec/grass_blade.png");
 	sf::Texture grEnt;
 	grEnt.loadFromFile("ImageRec/grass_blade.png");
-
+	/**/
 	WorldObject grass("Grass", 00, &grBlade, &grEnt,
 		2.0f, true, sf::Vector2u(1, 1),
 		0.0f, 1.0f, sf::Vector2f(0.0f, 0.0f));
 	ObjectDisperse grs(grass, sf::Vector2f(1000, 1000), 0.5f);
-	std::vector<WorldObject> gr = grs.Disperse(1u);
-	for (unsigned int i = 0; i < gr.size(); i++) {
-		worldI.push_back(gr[i]);
-	}
-	ID += 1 + gr.size();
-
+	ID = grs.Disperse(1, worldSet);
+	
 	// Stump
+	/**/
 	sf::Texture stumpTxtr;
 	stumpTxtr.loadFromFile("ImageRec/pixel_stump.png");
 	sf::Texture stumpEnt;
@@ -49,18 +47,13 @@ int main()
 		2.0f, true, sf::Vector2u(1, 1),
 		0.0f, 1.0f, sf::Vector2f(0.0f, 0.0f));
 	ObjectDisperse stp(stump, sf::Vector2f(1000, 1000), 0.5f);
-	std::vector<WorldObject> st = stp.Disperse(ID);
-	for (unsigned int i = 0; i < st.size(); i++) {
-		worldI.push_back(st[i]);
-		collItems.push_back(st[i]);
-	}
-	ID += 1 + st.size();
+	ID = stp.Disperse(ID, worldSet, collSet);
 	
 	// WORLD CREATION //
 	sf::Texture ground;
 	ground.loadFromFile("ImageRec/pixel_grass.png");
-	World wrld(&ground, worldI, collItems);
-	
+	World wrld(&ground, worldSet, collSet);
+
 	// PLAYER CREATION //
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("ImageRec/player_texture.png");
@@ -71,15 +64,13 @@ int main()
 		/*Position*/ sf::Vector2f(250.0f, 250.0f), /*Speed*/ 200.0f);
 
 	// GUI CREATION //
-	/**/
 	sf::RectangleShape healthbar;
 	healthbar.setSize(sf::Vector2f(player.health, 10.0f));
 	healthbar.setPosition(9620.0f, 9800.0f);
 	healthbar.setFillColor(sf::Color(0, 0, 255));
 	sf::Vector2f pos = healthbar.getPosition();
-	
+
 	Gui g(healthbar);
-	g.elements.push_back(healthbar);
 	
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -93,23 +84,38 @@ int main()
 
 		// UPDATE //
 		player.Update(deltaTime);
-
-		for (unsigned int i = 0; i < wrld.collideables.size(); ++i)
+		bool completed = false;
+		while (!completed)
 		{
-			player.Collide(wrld.collideables[i], wrld.collideables);
+			for (auto obj : wrld.collideables)
+			{
+				bool mined = player.Collide(obj);
+				if (mined)
+				{
+					wrld.collideables.erase(obj);
+					wrld.worldItems.erase(obj);
+					completed = false;
+					break;
+				}
+				else
+				{
+					completed = true;
+				}	
+			}
 		}
+		
 
 		// DISPLAY //
 		window.clear(sf::Color(150, 150, 150));
-		/**/
+		
 		worldView.setCenter(player.GetPosition());
 		window.setView(worldView);
 		wrld.Draw(window);
-		for (unsigned int i = 0; i < wrld.worldItems.size(); ++i)
+		for (auto obj : wrld.worldItems)
 		{
-			window.draw(wrld.worldItems[i].body);
+			obj.Draw(window, worldView);
 		}
-		player.Draw(window);
+		player.Draw(window, worldView);
 		
 		// UI //
 		g.Update(player);

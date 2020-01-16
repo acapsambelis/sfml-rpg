@@ -6,7 +6,6 @@ WorldObject::WorldObject(const char* name, int ID,
 	sf::Texture* texture, sf::Texture* entTexture, float sizeScalar, 
 	bool frozen, sf::Vector2u imageCount, float switchTime,
 	float weight, sf::Vector2f position) :
-		//Visible(texture, sizeScalar, position),
 		animation(texture, frozen, imageCount, switchTime),
 		ent(name, entTexture)
 {
@@ -25,7 +24,6 @@ WorldObject::WorldObject(const char* name, int ID,
 // COPY //
 WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID, 
 	sf::Vector2f position) :
-		//Visible(cpy.body),
 		animation(cpy.animation),
 		ent(cpy.ent)
 {
@@ -47,9 +45,17 @@ WorldObject::~WorldObject()
 }
 
 
-void WorldObject::Draw(sf::RenderWindow& window)
+void WorldObject::Draw(sf::RenderWindow& window, sf::View vw)
 {
-	window.draw(body);
+	sf::Vector2f size = vw.getSize();
+	sf::Vector2f center = vw.getCenter();
+	if (GetPosition().x + body.getSize().x > center.x - size.x / 2.0f &&
+		GetPosition().x - body.getSize().x < center.x + size.x / 2.0f &&
+		GetPosition().y + body.getSize().y > center.y - size.y / 2.0f &&
+		GetPosition().y - body.getSize().y < center.y + size.y / 2.0f )
+	{
+		window.draw(body);
+	}
 }
 
 bool WorldObject::UpdateCollision(WorldObject& other)
@@ -107,4 +113,9 @@ void WorldObject::Bounce(WorldObject& other, sf::Vector3f react, float weightOve
 		react.z * (1.0f - weightOverride) * react.y);
 	Move(react.z * weightOverride * react.x,
 		-react.z * weightOverride * react.y);
+}
+
+bool WorldObject::operator==(const WorldObject& w) const
+{
+	return (this->ID == w.ID);
 }

@@ -69,7 +69,7 @@ void Player::Update(float deltaTime)
 	Move(movement.x, movement.y);
 }
 
-void Player::Collide(WorldObject& other, std::vector<WorldObject>& worldI)
+bool Player::Collide(WorldObject& other)
 {
 	bool coll = UpdateCollision(other);
 	if (coll && state == 2)
@@ -77,13 +77,16 @@ void Player::Collide(WorldObject& other, std::vector<WorldObject>& worldI)
 		if (health > 0)
 		{
 			this->inventory.push_back(Mine(other));
+			//worldI.erase(other);
+			return true;
 		}
 	}
+	return false;
 }
 
 Entity Player::Mine(WorldObject& other)
 {
 	Entity temp(other.ent);
-	this->health -= 1.0f;
+	this->health -= 10.0f;
 	return temp;
 }

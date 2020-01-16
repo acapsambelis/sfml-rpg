@@ -12,12 +12,13 @@ public:
 	WorldObject(const WorldObject& cpy, unsigned int ID, sf::Vector2f position);
 	~WorldObject();
 
-	void Draw(sf::RenderWindow& window);
-
+	// Helpers //
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	void Move(float dx, float dy) { body.move(dx, dy); }
 
-public:
+	// Functions //
+	void Draw(sf::RenderWindow& window, sf::View vw);
+
 	// Collisions //
 	bool UpdateCollision(WorldObject& other);
 
@@ -26,6 +27,9 @@ public:
 		float weightOverride = -1.0f);
 
 	sf::Vector2f GetHalfSize() { return body.getSize() / 2.0f; }
+
+	// Overloads //
+	bool operator==(const WorldObject& w) const;
 
 
 public:
@@ -40,4 +44,13 @@ public:
 
 	Entity ent;
 
+};
+
+class MyHashFunction
+{
+public:
+	size_t operator()(const WorldObject& obj) const
+	{
+		return obj.ID;
+	}
 };

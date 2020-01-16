@@ -1,8 +1,8 @@
 #include "World.h"
 #include <SFML\Graphics.hpp>
 
-World::World(sf::Texture* texture, std::vector<WorldObject> &worldI,
-	std::vector<WorldObject>& coll) :
+World::World(sf::Texture* texture, std::unordered_set<WorldObject, MyHashFunction> &worldI,
+	std::unordered_set<WorldObject, MyHashFunction>& coll) :
 	worldItems(worldI),
 	collideables(coll)
 {

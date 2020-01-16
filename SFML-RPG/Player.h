@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "World.h"
 #include <vector>
+#include <unordered_set>
 
 class Player : public WorldObject
 {
@@ -16,7 +17,7 @@ public:
 
 	void Update(float deltaTime);
 
-	void Collide(WorldObject& other, std::vector<WorldObject>& worldI);
+	bool Collide(WorldObject& other);
 
 	Entity Mine(WorldObject& other);
 
