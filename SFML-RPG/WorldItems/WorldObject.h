@@ -1,14 +1,18 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Animation.h"
+#include "..\Character\Animation.h"
 #include "Entity.h"
 
 class WorldObject
 {
 public:
-	WorldObject(const char* name, int ID, sf::Texture* texture, sf::Texture* entTexture,
-		float sizeScalar, bool frozen, sf::Vector2u imageCount,
-		float switchTime, float weight, sf::Vector2f position);
+	WorldObject(
+		/*Metadata*/ const char* name, int ID, sf::Vector2f position,
+		/*Textures*/ sf::Texture* texture, sf::Texture* entTexture,
+		/*Collision*/ float weight,
+		/*Animation*/ float sizeScalar, bool frozen, 
+				sf::Vector2u imageCount, float switchTime
+	);
 	WorldObject(const WorldObject& cpy, unsigned int ID, sf::Vector2f position);
 	~WorldObject();
 
@@ -20,7 +24,7 @@ public:
 	void Draw(sf::RenderWindow& window, sf::View vw);
 
 	// Collisions //
-	bool UpdateCollision(WorldObject& other);
+	bool UpdateCollision(WorldObject& other, sf::View vw);
 
 	sf::Vector3f CheckCollision(WorldObject& other);
 	void Bounce(WorldObject& other, sf::Vector3f react, 

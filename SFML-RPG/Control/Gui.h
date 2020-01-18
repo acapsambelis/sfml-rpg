@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Player.h"
+#include "..\Character\Player.h"
 #include <vector>
 
 class Gui

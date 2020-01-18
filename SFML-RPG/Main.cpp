@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-#include "ObjectDisperse.h"
-#include "WorldObject.h"
-#include "World.h"
-#include "Gui.h"
+#include "Character\Player.h"
+#include "WorldItems\ObjectDisperse.h"
+#include "WorldItems\WorldObject.h"
+#include "WorldItems\World.h"
+#include "Control\Gui.h"
 
 #include <iostream>
 #include <unordered_set>
@@ -16,7 +16,6 @@ int main()
 	window.create(currentMode, "Title", sf::Style::Fullscreen);
 
 	sf::View worldView(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(800, 450));
-
 	sf::View guiView(sf::Vector2f(10000.0f, 10000.0f), sf::Vector2f(800.0f, 450.0f));
 
 	// ITEMDISPERSE CREATION //
@@ -30,38 +29,50 @@ int main()
 	sf::Texture grEnt;
 	grEnt.loadFromFile("ImageRec/grass_blade.png");
 	/**/
-	WorldObject grass("Grass", 00, &grBlade, &grEnt,
-		2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(0.0f, 0.0f));
+	WorldObject grass(
+		/*Metadata*/ "Grass", 00, sf::Vector2f(0.0f, 0.0f),
+		/*Textures*/ &grBlade, &grEnt,
+		/*Collision*/ 0.0f,
+		/*Animation*/ 2.0f, true, sf::Vector2u(1, 1), 0.0f
+	);
+
 	ObjectDisperse grs(grass, sf::Vector2f(1000, 1000), 0.5f);
 	ID = grs.Disperse(1, worldSet);
-	
+
 	// Stump
-	/**/
 	sf::Texture stumpTxtr;
 	stumpTxtr.loadFromFile("ImageRec/pixel_stump.png");
 	sf::Texture stumpEnt;
 	stumpEnt.loadFromFile("ImageRec/pixel_stump.png");
-
-	WorldObject stump("Stump", 00, &stumpTxtr, &stumpEnt,
-		2.0f, true, sf::Vector2u(1, 1),
-		0.0f, 1.0f, sf::Vector2f(0.0f, 0.0f));
+	/**/
+	WorldObject stump(
+		/*Metadata*/ "Stump", 00, sf::Vector2f(0.0f, 0.0f),
+		/*Textures*/ &stumpTxtr, &stumpEnt,
+		/*Collision*/ 1.0f,
+		/*Animation*/ 2.0f, true, sf::Vector2u(1, 1), 0.0f
+	);
 	ObjectDisperse stp(stump, sf::Vector2f(1000, 1000), 0.5f);
 	ID = stp.Disperse(ID, worldSet, collSet);
-	
+
 	// WORLD CREATION //
 	sf::Texture ground;
 	ground.loadFromFile("ImageRec/pixel_grass.png");
 	World wrld(&ground, worldSet, collSet);
 
+
 	// PLAYER CREATION //
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("ImageRec/player_texture.png");
 
-	Player player(/*Identity*/ wrld, "Player", 0, 
-		/*Txtr & animation*/ &playerTexture, 2, true, sf::Vector2u(1, 1), 0.0f,
-		/*weight*/ 0.5f, /*strength*/ 1.0f,
-		/*Position*/ sf::Vector2f(250.0f, 250.0f), /*Speed*/ 200.0f);
+	Player player(
+		/*Metadata*/ wrld, "Player", 0, sf::Vector2f(250.0f, 250.0f),
+		/*Texture*/ &playerTexture,
+		/*Collision*/ 0.5f,
+		/*Animation*/ 2, true, sf::Vector2u(1, 1), 0.0f,
+		/*Character*/ 100.0f, 200.0f, 1.0f
+	);
+
+
 
 	// GUI CREATION //
 	sf::RectangleShape healthbar;
@@ -75,35 +86,32 @@ int main()
 	float deltaTime = 0.0f;
 	sf::Clock clock;
 
-	while (window.isOpen())
+	while(window.isOpen())
 	{
 		deltaTime = clock.restart().asSeconds();
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			window.close();
 
 		// UPDATE //
 		player.Update(deltaTime);
 		bool completed = false;
-		while (!completed)
+		while(!completed)
 		{
-			for (auto obj : wrld.collideables)
+			for(auto obj : wrld.collideables)
 			{
-				bool mined = player.Collide(obj);
-				if (mined)
+				bool mined = player.Collide(obj, worldView);
+				if(mined)
 				{
 					wrld.collideables.erase(obj);
 					wrld.worldItems.erase(obj);
 					completed = false;
 					break;
-				}
-				else
-				{
+				} else {
 					completed = true;
-				}	
+				}
 			}
 		}
-		
 
 		// DISPLAY //
 		window.clear(sf::Color(150, 150, 150));
@@ -111,7 +119,7 @@ int main()
 		worldView.setCenter(player.GetPosition());
 		window.setView(worldView);
 		wrld.Draw(window);
-		for (auto obj : wrld.worldItems)
+		for(auto obj : wrld.worldItems)
 		{
 			obj.Draw(window, worldView);
 		}
@@ -123,8 +131,6 @@ int main()
 		g.Draw(window);
 		
 		window.display();
-
 	}
-
 	return 0;
 }

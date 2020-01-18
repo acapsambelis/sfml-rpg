@@ -144,23 +144,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Gui.cpp" />
-    <ClCompile Include="ObjectDisperse.cpp" />
+    <ClCompile Include="Character\Animation.cpp" />
+    <ClCompile Include="Character\Character.cpp" />
+    <ClCompile Include="WorldItems\Entity.cpp" />
+    <ClCompile Include="Control\Gui.cpp" />
+    <ClCompile Include="WorldItems\ObjectDisperse.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="World.cpp" />
-    <ClCompile Include="WorldObject.cpp" />
+    <ClCompile Include="Character\Player.cpp" />
+    <ClCompile Include="WorldItems\World.cpp" />
+    <ClCompile Include="WorldItems\WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Gui.h" />
-    <ClInclude Include="ObjectDisperse.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="World.h" />
-    <ClInclude Include="WorldObject.h" />
+    <ClInclude Include="Character\Animation.h" />
+    <ClInclude Include="Character\Character.h" />
+    <ClInclude Include="WorldItems\Entity.h" />
+    <ClInclude Include="Control\Gui.h" />
+    <ClInclude Include="WorldItems\ObjectDisperse.h" />
+    <ClInclude Include="Character\Player.h" />
+    <ClInclude Include="WorldItems\World.h" />
+    <ClInclude Include="WorldItems\WorldObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\box.png" />

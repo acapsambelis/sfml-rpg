@@ -1,19 +1,22 @@
 #include "Player.h"
 #include <SFML\Graphics.hpp>
-#include "Animation.h"
 
 #include <iostream>
 
-Player::Player(World& wr, const char* name, int ID, sf::Texture* texture,
-	float sizeScalar, bool frozen, sf::Vector2u imageCount,
-	float switchTime, float strength, float weight, sf::Vector2f position, float speed) :
-	WorldObject(name, ID, texture, texture, sizeScalar, frozen, imageCount, switchTime, weight, position),
-	wr(wr)
+Player::Player(
+	/*Metadata*/ World& wr, const char* name, int ID, sf::Vector2f position,
+	/*Texture*/ sf::Texture* texture,
+	/*Collision*/ float weight,
+	/*Animation*/ float sizeScalar, bool frozen, 
+			sf::Vector2u imageCount, float switchTime,
+	/*Character*/ float health, float speed, float strength
+	) :
+	Character(wr, name, ID, position,
+		texture, texture,
+		weight,
+		sizeScalar, frozen, imageCount, switchTime,
+		health, speed, strength)
 {
-	this->health = 100.0f;
-	this->speed = speed;
-	this->strength = strength;
-	this->state = 0;
 }
 
 Player::~Player()
@@ -24,7 +27,7 @@ void Player::Update(float deltaTime)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		state = 1;
 		movement.x -= speed * deltaTime;
@@ -45,7 +48,8 @@ void Player::Update(float deltaTime)
 		movement.y += speed * deltaTime;
 	}
 		
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
+	{
 		state = 2;
 	}
 
@@ -53,31 +57,34 @@ void Player::Update(float deltaTime)
 	{
 		row = 0;
 	}
-	else
-	{
+	else {
 		row = 1;
 		if (movement.x > 0.0f)
+		{
 			faceRight = true;
+		}
 		else
+		{
 			faceRight = false;
+		}
 	}
 
 	if (!animation.frozen)
+	{
 		animation.Update(row, deltaTime, faceRight);
-
+	}
 	body.setTextureRect(animation.uvRect);
 	Move(movement.x, movement.y);
 }
 
-bool Player::Collide(WorldObject& other)
+bool Player::Collide(WorldObject& other, sf::View vw)
 {
-	bool coll = UpdateCollision(other);
+	bool coll = UpdateCollision(other, vw);
 	if (coll && state == 2)
 	{
-		if (health > 0)
+		if (health > 0) 
 		{
 			this->inventory.push_back(Mine(other));
-			//worldI.erase(other);
 			return true;
 		}
 	}

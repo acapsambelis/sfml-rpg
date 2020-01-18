@@ -1,11 +1,14 @@
 #include "WorldObject.h"
-#include "Player.h"
+#include "..\Character\Player.h"
 
 // NEW //
-WorldObject::WorldObject(const char* name, int ID,
-	sf::Texture* texture, sf::Texture* entTexture, float sizeScalar, 
-	bool frozen, sf::Vector2u imageCount, float switchTime,
-	float weight, sf::Vector2f position) :
+WorldObject::WorldObject(
+	/*Metadata*/ const char* name, int ID, sf::Vector2f position,
+	/*Textures*/ sf::Texture* texture, sf::Texture* entTexture,
+	/*Collision*/ float weight,
+	/*Animation*/ float sizeScalar, bool frozen,
+		sf::Vector2u imageCount, float switchTime
+	) :
 		animation(texture, frozen, imageCount, switchTime),
 		ent(name, entTexture)
 {
@@ -58,13 +61,21 @@ void WorldObject::Draw(sf::RenderWindow& window, sf::View vw)
 	}
 }
 
-bool WorldObject::UpdateCollision(WorldObject& other)
+bool WorldObject::UpdateCollision(WorldObject& other, sf::View vw)
 {
-	sf::Vector3f collisionDir = this->CheckCollision(other);
-	if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
+	sf::Vector2f size = vw.getSize();
+	sf::Vector2f center = vw.getCenter();
+	if (GetPosition().x + body.getSize().x > center.x - size.x / 2.0f &&
+		GetPosition().x - body.getSize().x < center.x + size.x / 2.0f &&
+		GetPosition().y + body.getSize().y > center.y - size.y / 2.0f &&
+		GetPosition().y - body.getSize().y < center.y + size.y / 2.0f)
 	{
-		Bounce(other, collisionDir);
-		return true;
+		sf::Vector3f collisionDir = this->CheckCollision(other);
+		if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
+		{
+			Bounce(other, collisionDir);
+			return true;
+		}
 	}
 	return false;
 }
@@ -83,6 +94,7 @@ sf::Vector3f WorldObject::CheckCollision(WorldObject& other)
 	float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
+	{
 		if (intersectX > intersectY)
 		{
 			if (deltaX > 0.0f)  // player moving right
@@ -97,16 +109,20 @@ sf::Vector3f WorldObject::CheckCollision(WorldObject& other)
 			else				// player moving up
 				return sf::Vector3f(0.0f, 1.0f, intersectY);
 		}
-
+	}
 	return sf::Vector3f(0.0f, 0.0f, 0.0f);
 }
 
 void WorldObject::Bounce(WorldObject& other, sf::Vector3f react, float weightOverride)
 {
 	if (weightOverride == -1.0f)
+	{
 		weightOverride = other.weight;
+	}
 	else
+	{
 		weightOverride = 1.0f;
+	}
 
 	
 	other.Move(-react.z * (1.0f - weightOverride) * react.x,
