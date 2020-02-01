@@ -2,14 +2,15 @@
 
 Character::Character(
 	/*Metadata*/ World& wr, const char* name, int ID, sf::Vector2f position,
-	/*Texture*/ sf::Texture* texture, sf::Texture* entTexture,
+	/*Texture*/ const char* texture, sf::Texture* text, 
 	/*Collision*/ float weight,
 	/*Animation*/ float sizeScalar, bool frozen, 
 			sf::Vector2u imageCount, float switchTime,
 	/*Character*/ float health, float speed, float strength
 	) :
 	WorldObject(name, ID, position,
-		texture, entTexture,
+		texture, texture,
+		text, text,
 		weight,
 		sizeScalar, frozen, imageCount, switchTime),
 	wr(wr)

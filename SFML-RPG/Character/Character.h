@@ -8,7 +8,7 @@ class Character : public WorldObject
 public:
 	Character(
 		/*Metadata*/ World& wr, const char* name, int ID, sf::Vector2f position,
-		/*Texture*/ sf::Texture* texture, sf::Texture* entTexture,
+		/*Texture*/ const char* texture, sf::Texture* text,
 		/*Collision*/ float weight,
 		/*Animation*/ float sizeScalar, bool frozen, 
 				sf::Vector2u imageCount, float switchTime,
@@ -25,11 +25,5 @@ public:
 	float strength;
 
 	int state;
-	/*
-	0. Stationary
-	1. Moving
-	2. Mining
-	*/
-
 };
 

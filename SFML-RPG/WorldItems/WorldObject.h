@@ -8,13 +8,17 @@ class WorldObject
 public:
 	WorldObject(
 		/*Metadata*/ const char* name, int ID, sf::Vector2f position,
-		/*Textures*/ sf::Texture* texture, sf::Texture* entTexture,
+		/*Textures*/ const char* texturePath, const char* entTexturePath,
+					 sf::Texture* text,		  sf::Texture* entText,
 		/*Collision*/ float weight,
 		/*Animation*/ float sizeScalar, bool frozen, 
 				sf::Vector2u imageCount, float switchTime
 	);
 	WorldObject(const WorldObject& cpy, unsigned int ID, sf::Vector2f position);
 	~WorldObject();
+
+	// Overloads //
+	bool operator==(const WorldObject& w) const;
 
 	// Helpers //
 	sf::Vector2f GetPosition() { return body.getPosition(); }
@@ -32,13 +36,14 @@ public:
 
 	sf::Vector2f GetHalfSize() { return body.getSize() / 2.0f; }
 
-	// Overloads //
-	bool operator==(const WorldObject& w) const;
 
 
 public:
 	int ID;
+	const char* name;
 
+	const char* texturePath;
+	const char* entTexturePath;
 	sf::RectangleShape body;
 	Animation animation;
 	unsigned int row;

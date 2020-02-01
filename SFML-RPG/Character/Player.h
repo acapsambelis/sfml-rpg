@@ -7,19 +7,21 @@
 
 #include <vector>
 #include <unordered_set>
+#include <iostream>
 
 class Player : public Character
 {
 public:
 	Player(
 		/*Metadata*/ World& wr, const char* name, int ID, sf::Vector2f position,
-		/*Texture*/ sf::Texture* texture,
+		/*Texture*/ const char* texturePath, sf::Texture* text,
 		/*Collision*/ float weight,
 		/*Animation*/ float sizeScalar, bool frozen, 
 				sf::Vector2u imageCount, float switchTime,
 		/*Character*/ float health, float speed, float strength
 	);
 	~Player();
+	friend std::ostream& operator<<(std::ostream& os, const Player& pl);
 
 	void Update(float deltaTime);
 
@@ -29,7 +31,6 @@ public:
 
 public:
 	std::vector<Entity> inventory;
-
 	/*
 	STATES
 	0. Stationary

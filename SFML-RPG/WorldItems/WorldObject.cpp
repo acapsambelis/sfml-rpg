@@ -4,19 +4,24 @@
 // NEW //
 WorldObject::WorldObject(
 	/*Metadata*/ const char* name, int ID, sf::Vector2f position,
-	/*Textures*/ sf::Texture* texture, sf::Texture* entTexture,
+	/*Textures*/ const char* texturePath, const char* entTexturePath,
+				 sf::Texture* text,		  sf::Texture* entText,
 	/*Collision*/ float weight,
 	/*Animation*/ float sizeScalar, bool frozen,
 		sf::Vector2u imageCount, float switchTime
 	) :
-		animation(texture, frozen, imageCount, switchTime),
-		ent(name, entTexture)
+		animation(texturePath, frozen, imageCount, switchTime),
+		ent(name, entTexturePath, entText)
 {
 	this->ID = ID;
+	this->name = name;
 
-	body.setSize(sizeScalar * sf::Vector2f(texture->getSize()));
+	this->texturePath = texturePath;
+	this->entTexturePath = entTexturePath;
+	
+	body.setSize(sizeScalar * sf::Vector2f(text->getSize()));
 	body.setOrigin(body.getSize() / 2.0f);
-	body.setTexture(texture);
+	body.setTexture(text);
 	body.setPosition(position);
 
 	this->weight = weight;
@@ -31,6 +36,10 @@ WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID,
 		ent(cpy.ent)
 {
 	this->ID = ID;
+	this->name = cpy.name;
+
+	this->texturePath = cpy.texturePath;
+	this->entTexturePath = cpy.entTexturePath;
 
 	body.setSize(cpy.body.getSize());
 	body.setOrigin(body.getSize() / 2.0f);

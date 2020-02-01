@@ -1,11 +1,14 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include <fstream>
 
 class Animation
 {
 public:
-	Animation(sf::Texture* texture, bool frozen, sf::Vector2u imageCount, float switchTime);
+	Animation(const char* texture, bool frozen, sf::Vector2u imageCount, float switchTime);
 	~Animation();
+
+	friend std::ostream& operator<<(std::ostream& os, const Animation& an);
 
 public:
 	sf::IntRect uvRect;

@@ -4,9 +4,13 @@
 #include "WorldItems\WorldObject.h"
 #include "WorldItems\World.h"
 #include "Control\Gui.h"
+#include "Control\SaveMachine.h"
 
 #include <iostream>
 #include <unordered_set>
+
+#include <fstream>
+
 
 int main()
 {
@@ -24,14 +28,13 @@ int main()
 
 	int ID = 0;
 	// Grass
-	sf::Texture grBlade;
-	grBlade.loadFromFile("ImageRec/grass_blade.png");
-	sf::Texture grEnt;
-	grEnt.loadFromFile("ImageRec/grass_blade.png");
 	/**/
+	sf::Texture gra;
+	gra.loadFromFile("ImageRec/grass_blade.png");
 	WorldObject grass(
 		/*Metadata*/ "Grass", 00, sf::Vector2f(0.0f, 0.0f),
-		/*Textures*/ &grBlade, &grEnt,
+		/*Textures*/ "ImageRec/grass_blade.png", "ImageRec/grass_blade.png",
+					 &gra, &gra,
 		/*Collision*/ 0.0f,
 		/*Animation*/ 2.0f, true, sf::Vector2u(1, 1), 0.0f
 	);
@@ -40,14 +43,13 @@ int main()
 	ID = grs.Disperse(1, worldSet);
 
 	// Stump
-	sf::Texture stumpTxtr;
-	stumpTxtr.loadFromFile("ImageRec/pixel_stump.png");
-	sf::Texture stumpEnt;
-	stumpEnt.loadFromFile("ImageRec/pixel_stump.png");
 	/**/
+	sf::Texture stu;
+	stu.loadFromFile("ImageRec/pixel_stump.png");
 	WorldObject stump(
 		/*Metadata*/ "Stump", 00, sf::Vector2f(0.0f, 0.0f),
-		/*Textures*/ &stumpTxtr, &stumpEnt,
+		/*Textures*/ "ImageRec/pixel_stump.png", "ImageRec/pixel_stump.png",
+					 &stu, &stu,
 		/*Collision*/ 1.0f,
 		/*Animation*/ 2.0f, true, sf::Vector2u(1, 1), 0.0f
 	);
@@ -66,13 +68,11 @@ int main()
 
 	Player player(
 		/*Metadata*/ wrld, "Player", 0, sf::Vector2f(250.0f, 250.0f),
-		/*Texture*/ &playerTexture,
+		/*Texture*/ "ImageRec/player_texture.png", &playerTexture,
 		/*Collision*/ 0.5f,
 		/*Animation*/ 2, true, sf::Vector2u(1, 1), 0.0f,
 		/*Character*/ 100.0f, 200.0f, 1.0f
 	);
-
-
 
 	// GUI CREATION //
 	sf::RectangleShape healthbar;
@@ -132,5 +132,9 @@ int main()
 		
 		window.display();
 	}
+
+	SaveMachine save;
+	save.playerSave(player);
+
 	return 0;
 }

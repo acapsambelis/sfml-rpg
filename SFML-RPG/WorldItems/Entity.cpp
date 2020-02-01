@@ -1,9 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(const char* name, sf::Texture* txtr)
+Entity::Entity(const char* name, const char* texturePath,
+	sf::Texture* text)
 {
 	this->name = name;
-	this->txtr.setTexture(txtr);
+	this->txtr.setTexture(text);
 }
 
 Entity::Entity(const Entity& copy)

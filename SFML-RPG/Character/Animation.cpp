@@ -1,17 +1,17 @@
 #include "Animation.h"
 
-Animation::Animation(sf::Texture* texture, bool frozen, sf::Vector2u imageCount, float switchTime)
+Animation::Animation(const char* texture, bool frozen, sf::Vector2u imageCount, float switchTime)
 {
-	// Constructor funtion
-	//this == self (from python)
 	this->frozen = frozen;
 	this->imageCount = imageCount;
 	this->switchTime = switchTime;
 	totalTime = 0.0f;
 	currentImage.x = 0;
 
-	uvRect.width  = texture->getSize().x / float(imageCount.x);
-	uvRect.height = texture->getSize().y / float(imageCount.y);
+	sf::Texture text;
+	text.loadFromFile(texture);
+	uvRect.width  = text.getSize().x / float(imageCount.x);
+	uvRect.height = text.getSize().y / float(imageCount.y);
 
 }
 
@@ -46,4 +46,11 @@ void Animation::Update(int row, float deltaTime, bool faceRight)
 		uvRect.left = (currentImage.x + 1) * abs(uvRect.width);
 		uvRect.width = -abs(uvRect.width);
 	}
+}
+
+std::ostream& operator<<(std::ostream& os, const Animation& an)
+{
+	os << an.frozen << ',' << an.imageCount.x << '-' << an.imageCount.y
+		<< ',' << an.switchTime;
+	return os;
 }
