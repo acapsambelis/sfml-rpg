@@ -144,25 +144,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Character\Animation.cpp" />
+    <ClCompile Include="Character\Character.cpp" />
+    <ClCompile Include="Control\Game.cpp" />
+    <ClCompile Include="WorldItems\Entity.cpp" />
+    <ClCompile Include="Control\Gui.cpp" />
+    <ClCompile Include="WorldItems\ObjectDisperse.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="World.cpp" />
-    <ClCompile Include="WorldObject.cpp" />
+    <ClCompile Include="Character\Player.cpp" />
+    <ClCompile Include="WorldItems\World.cpp" />
+    <ClCompile Include="WorldItems\WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="World.h" />
-    <ClInclude Include="WorldObject.h" />
+    <ClInclude Include="Character\Animation.h" />
+    <ClInclude Include="Character\Character.h" />
+    <ClInclude Include="Control\Game.h" />
+    <ClInclude Include="WorldItems\Entity.h" />
+    <ClInclude Include="Control\Gui.h" />
+    <ClInclude Include="WorldItems\ObjectDisperse.h" />
+    <ClInclude Include="Character\Player.h" />
+    <ClInclude Include="WorldItems\World.h" />
+    <ClInclude Include="WorldItems\WorldObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\box.png" />
+    <Image Include="ImageRec\grass_blade.png" />
     <Image Include="ImageRec\ground_terrain.png" />
     <Image Include="ImageRec\iron_box.png" />
+    <Image Include="ImageRec\pixel_grass.png" />
+    <Image Include="ImageRec\pixel_stump.png" />
     <Image Include="ImageRec\player_texture.png" />
+    <Image Include="ImageRec\slime.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

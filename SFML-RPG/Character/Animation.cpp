@@ -1,19 +1,20 @@
 #include "Animation.h"
 
-Animation::Animation(sf::Texture* texture, bool frozen, sf::Vector2u imageCount, float switchTime)
+Animation::Animation(std::string texture, bool frozen, sf::Vector2u imageCount, float switchTime)
 {
-	// Constructor funtion
-	//this == self (from python)
 	this->frozen = frozen;
 	this->imageCount = imageCount;
 	this->switchTime = switchTime;
 	totalTime = 0.0f;
 	currentImage.x = 0;
 
-	uvRect.width  = texture->getSize().x / float(imageCount.x);
-	uvRect.height = texture->getSize().y / float(imageCount.y);
+	sf::Texture text;
+	text.loadFromFile(texture.c_str());
+	uvRect.width  = text.getSize().x / float(imageCount.x);
+	uvRect.height = text.getSize().y / float(imageCount.y);
 
 }
+
 
 Animation::~Animation()
 {
@@ -46,4 +47,14 @@ void Animation::Update(int row, float deltaTime, bool faceRight)
 		uvRect.left = (currentImage.x + 1) * abs(uvRect.width);
 		uvRect.width = -abs(uvRect.width);
 	}
+}
+
+
+void Animation::setImageCount(sf::Vector2u imageCount)
+{
+	this->imageCount = imageCount;
+}
+void Animation::setSwitchTime(float switchTime)
+{
+	this->switchTime = switchTime;
 }
