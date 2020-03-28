@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(const char* name, const char* texturePath,
+Entity::Entity(std::string name, std::string texturePath,
 	sf::Texture* text)
 {
 	this->name = name;

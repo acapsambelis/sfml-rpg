@@ -146,9 +146,7 @@
   <ItemGroup>
     <ClCompile Include="Character\Animation.cpp" />
     <ClCompile Include="Character\Character.cpp" />
-    <ClCompile Include="Control\SaveMachine.cpp" />
     <ClCompile Include="Control\Game.cpp" />
-    <ClCompile Include="Npcs\Npc.cpp" />
     <ClCompile Include="WorldItems\Entity.cpp" />
     <ClCompile Include="Control\Gui.cpp" />
     <ClCompile Include="WorldItems\ObjectDisperse.cpp" />
@@ -160,9 +158,7 @@
   <ItemGroup>
     <ClInclude Include="Character\Animation.h" />
     <ClInclude Include="Character\Character.h" />
-    <ClInclude Include="Control\SaveMachine.h" />
     <ClInclude Include="Control\Game.h" />
-    <ClInclude Include="Npcs\Npc.h" />
     <ClInclude Include="WorldItems\Entity.h" />
     <ClInclude Include="Control\Gui.h" />
     <ClInclude Include="WorldItems\ObjectDisperse.h" />

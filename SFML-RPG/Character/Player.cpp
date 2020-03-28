@@ -2,29 +2,36 @@
 #include <SFML\Graphics.hpp>
 
 #include <iostream>
+#include <string>
+#include <vector>
+
 
 Player::Player(
-	/*Metadata*/ World& wr, const char* name, int ID, sf::Vector2f position,
-	/*Texture*/ const char* texturePath, sf::Texture* text,
+	/*Metadata*/ std::string name, int ID, sf::Vector2f position,
+	/*Texture*/ std::string texturePath, sf::Texture* text,
 	/*Collision*/ float weight,
-	/*Animation*/ float sizeScalar, bool frozen,
-	sf::Vector2u imageCount, float switchTime,
+	/*Animation*/ bool frozen,
+				sf::Vector2u imageCount, float switchTime,
 	/*Character*/ float health, float speed, float strength
 	) :
-	Character(wr, name, ID, position,
+	Character(name, ID, position,
 		texturePath, text,
 		weight,
-		sizeScalar, frozen, imageCount, switchTime,
+		frozen, imageCount, switchTime,
 		health, speed, strength)
 {
 	this->inventory = std::vector<Entity>();
 }
 
+Player::Player(const Player& cpy, int ID, sf::Vector2f position) :
+	Character(cpy, ID, position)
+{
+	this->inventory = std::vector<Entity>();
+}
 
 Player::~Player()
 {
 }
-
 
 void Player::Update(float deltaTime)
 {
@@ -99,15 +106,4 @@ Entity Player::Mine(WorldObject& other)
 	Entity temp(other.ent);
 	this->health -= 10.0f;
 	return temp;
-}
-
-std::ostream& operator<<(std::ostream& os, const Player& pl)
-{
-	os << pl.name << ',' << pl.ID << ',' << pl.body.getPosition().x << ',' <<
-		pl.body.getPosition().y << '\n'
-		<< pl.texturePath << '\n'
-		<< pl.weight << '\n'
-		<< pl.animation << '\n'
-		<< pl.health << ',' << pl.speed << ',' << pl.strength << '\n';
-	return os;
 }

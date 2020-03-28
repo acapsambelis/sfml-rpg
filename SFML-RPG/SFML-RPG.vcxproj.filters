@@ -42,13 +42,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Npcs\Npc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Control\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Control\SaveMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,13 +71,7 @@
     <ClInclude Include="Control\Gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Npcs\Npc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Control\Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\SaveMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

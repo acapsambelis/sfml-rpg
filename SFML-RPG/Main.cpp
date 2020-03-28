@@ -4,7 +4,6 @@
 #include "WorldItems\WorldObject.h"
 #include "WorldItems\World.h"
 #include "Control\Gui.h"
-#include "Control\SaveMachine.h"
 
 #include <iostream>
 #include <unordered_set>
@@ -28,7 +27,6 @@ int main()
 
 	int ID = 0;
 	// Grass
-	/**/
 	sf::Texture gra;
 	gra.loadFromFile("ImageRec/grass_blade.png");
 	WorldObject grass(
@@ -36,14 +34,13 @@ int main()
 		/*Textures*/ "ImageRec/grass_blade.png", "ImageRec/grass_blade.png",
 					 &gra, &gra,
 		/*Collision*/ 0.0f,
-		/*Animation*/ 2.0f, true, sf::Vector2u(1, 1), 0.0f
+		/*Animation*/ true, sf::Vector2u(1, 1), 0.0f
 	);
 
 	ObjectDisperse grs(grass, sf::Vector2f(1000, 1000), 0.5f);
 	ID = grs.Disperse(1, worldSet);
 
 	// Stump
-	/**/
 	sf::Texture stu;
 	stu.loadFromFile("ImageRec/pixel_stump.png");
 	WorldObject stump(
@@ -51,7 +48,7 @@ int main()
 		/*Textures*/ "ImageRec/pixel_stump.png", "ImageRec/pixel_stump.png",
 					 &stu, &stu,
 		/*Collision*/ 1.0f,
-		/*Animation*/ 2.0f, true, sf::Vector2u(1, 1), 0.0f
+		/*Animation*/ true, sf::Vector2u(1, 1), 0.0f
 	);
 	ObjectDisperse stp(stump, sf::Vector2f(1000, 1000), 0.5f);
 	ID = stp.Disperse(ID, worldSet, collSet);
@@ -67,10 +64,10 @@ int main()
 	playerTexture.loadFromFile("ImageRec/player_texture.png");
 
 	Player player(
-		/*Metadata*/ wrld, "Player", 0, sf::Vector2f(250.0f, 250.0f),
+		/*Metadata*/ "Player", -1, sf::Vector2f(250.0f, 250.0f),
 		/*Texture*/ "ImageRec/player_texture.png", &playerTexture,
 		/*Collision*/ 0.5f,
-		/*Animation*/ 2, true, sf::Vector2u(1, 1), 0.0f,
+		/*Animation*/ true, sf::Vector2u(1, 1), 0.0f,
 		/*Character*/ 100.0f, 200.0f, 1.0f
 	);
 
@@ -133,8 +130,6 @@ int main()
 		window.display();
 	}
 
-	SaveMachine save;
-	save.playerSave(player);
 
 	return 0;
 }

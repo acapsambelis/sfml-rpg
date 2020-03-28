@@ -1,5 +1,0 @@
-Player,0,-245.639,476.791
-ImageRec/player_texture.png
-0.5
-1,1-1,0
-30,200,1

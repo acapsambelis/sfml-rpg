@@ -3,7 +3,6 @@
 #include "Character.h"
 #include "..\WorldItems\WorldObject.h"
 #include "..\WorldItems\Entity.h"
-#include "..\WorldItems\World.h"
 
 #include <vector>
 #include <unordered_set>
@@ -13,15 +12,16 @@ class Player : public Character
 {
 public:
 	Player(
-		/*Metadata*/ World& wr, const char* name, int ID, sf::Vector2f position,
-		/*Texture*/ const char* texturePath, sf::Texture* text,
+		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
+		/*Texture*/ std::string texturePath, sf::Texture* text,
 		/*Collision*/ float weight,
-		/*Animation*/ float sizeScalar, bool frozen, 
+		/*Animation*/ bool frozen, 
 				sf::Vector2u imageCount, float switchTime,
 		/*Character*/ float health, float speed, float strength
 	);
+	Player(const Player& cpy, int ID, sf::Vector2f position);
 	~Player();
-	friend std::ostream& operator<<(std::ostream& os, const Player& pl);
+
 
 	void Update(float deltaTime);
 
@@ -29,7 +29,7 @@ public:
 
 	Entity Mine(WorldObject& other);
 
-public:
+private:
 	std::vector<Entity> inventory;
 	/*
 	STATES

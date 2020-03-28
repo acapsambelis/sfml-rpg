@@ -7,14 +7,14 @@ class WorldObject
 {
 public:
 	WorldObject(
-		/*Metadata*/ const char* name, int ID, sf::Vector2f position,
-		/*Textures*/ const char* texturePath, const char* entTexturePath,
+		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
+		/*Textures*/ std::string texturePath, std::string entTexturePath,
 					 sf::Texture* text,		  sf::Texture* entText,
 		/*Collision*/ float weight,
-		/*Animation*/ float sizeScalar, bool frozen, 
+		/*Animation*/ bool frozen, 
 				sf::Vector2u imageCount, float switchTime
 	);
-	WorldObject(const WorldObject& cpy, unsigned int ID, sf::Vector2f position);
+	WorldObject(const WorldObject& cpy, int ID, sf::Vector2f position);
 	~WorldObject();
 
 	// Overloads //
@@ -22,10 +22,11 @@ public:
 
 	// Helpers //
 	sf::Vector2f GetPosition() { return body.getPosition(); }
-	void Move(float dx, float dy) { body.move(dx, dy); }
+	void Move(float dx, float dy);
 
 	// Functions //
 	void Draw(sf::RenderWindow& window, sf::View vw);
+	void setBody(sf::Texture* text, sf::Vector2f position);
 
 	// Collisions //
 	bool UpdateCollision(WorldObject& other, sf::View vw);
@@ -40,10 +41,10 @@ public:
 
 public:
 	int ID;
-	const char* name;
+	std::string name;
 
-	const char* texturePath;
-	const char* entTexturePath;
+	std::string texturePath;
+	std::string entTexturePath;
 	sf::RectangleShape body;
 	Animation animation;
 	unsigned int row;

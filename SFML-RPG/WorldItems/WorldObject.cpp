@@ -3,12 +3,11 @@
 
 // NEW //
 WorldObject::WorldObject(
-	/*Metadata*/ const char* name, int ID, sf::Vector2f position,
-	/*Textures*/ const char* texturePath, const char* entTexturePath,
+	/*Metadata*/ std::string name, int ID, sf::Vector2f position,
+	/*Textures*/ std::string texturePath, std::string entTexturePath,
 				 sf::Texture* text,		  sf::Texture* entText,
 	/*Collision*/ float weight,
-	/*Animation*/ float sizeScalar, bool frozen,
-		sf::Vector2u imageCount, float switchTime
+	/*Animation*/ bool frozen, sf::Vector2u imageCount, float switchTime
 	) :
 		animation(texturePath, frozen, imageCount, switchTime),
 		ent(name, entTexturePath, entText)
@@ -19,7 +18,7 @@ WorldObject::WorldObject(
 	this->texturePath = texturePath;
 	this->entTexturePath = entTexturePath;
 	
-	body.setSize(sizeScalar * sf::Vector2f(text->getSize()));
+	body.setSize(2.0f * sf::Vector2f(text->getSize()));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(text);
 	body.setPosition(position);
@@ -30,7 +29,7 @@ WorldObject::WorldObject(
 }
 
 // COPY //
-WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID, 
+WorldObject::WorldObject(const WorldObject& cpy, int ID, 
 	sf::Vector2f position) :
 		animation(cpy.animation),
 		ent(cpy.ent)
@@ -51,11 +50,16 @@ WorldObject::WorldObject(const WorldObject& cpy, unsigned int ID,
 	this->faceRight = true;
 }
 
-
 WorldObject::~WorldObject()
 {
 }
 
+
+void WorldObject::Move(float dx, float dy)
+{
+	if (dx != 0.0 || dy != 0.0)
+		body.move(dx, dy);
+}
 
 void WorldObject::Draw(sf::RenderWindow& window, sf::View vw)
 {
@@ -68,6 +72,14 @@ void WorldObject::Draw(sf::RenderWindow& window, sf::View vw)
 	{
 		window.draw(body);
 	}
+}
+
+void WorldObject::setBody(sf::Texture* text, sf::Vector2f position)
+{
+	body.setSize(sf::Vector2f(text->getSize()));
+	body.setOrigin(2.0f * body.getSize() / 2.0f);
+	body.setTexture(text);
+	body.setPosition(position);
 }
 
 bool WorldObject::UpdateCollision(WorldObject& other, sf::View vw)

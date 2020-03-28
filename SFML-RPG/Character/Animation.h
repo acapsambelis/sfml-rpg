@@ -5,16 +5,19 @@
 class Animation
 {
 public:
-	Animation(const char* texture, bool frozen, sf::Vector2u imageCount, float switchTime);
+	Animation(std::string texture, bool frozen, sf::Vector2u imageCount, float switchTime);
 	~Animation();
 
-	friend std::ostream& operator<<(std::ostream& os, const Animation& an);
+
+	void Update(int row, float deltaTime, bool faceRight);
+
+	void setImageCount(sf::Vector2u imageCount);
+	void setSwitchTime(float switchTime);
 
 public:
 	sf::IntRect uvRect;
 	bool frozen;
 
-	void Update(int row, float deltaTime, bool faceRight);
 
 private:
 	sf::Vector2u imageCount;

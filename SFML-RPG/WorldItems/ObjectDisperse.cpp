@@ -27,7 +27,6 @@ int ObjectDisperse::Disperse(int nextID,
 			{
 				WorldObject nw = WorldObject(this->objType, nextID, 
 					sf::Vector2f(float(i), float(j)));
-				//WorldObject nw = WorldObject(this->objType);
 				set.insert(nw);
 				set2.insert(nw);
 				nextID++;

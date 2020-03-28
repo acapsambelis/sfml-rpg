@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-Animation::Animation(const char* texture, bool frozen, sf::Vector2u imageCount, float switchTime)
+Animation::Animation(std::string texture, bool frozen, sf::Vector2u imageCount, float switchTime)
 {
 	this->frozen = frozen;
 	this->imageCount = imageCount;
@@ -9,11 +9,12 @@ Animation::Animation(const char* texture, bool frozen, sf::Vector2u imageCount, 
 	currentImage.x = 0;
 
 	sf::Texture text;
-	text.loadFromFile(texture);
+	text.loadFromFile(texture.c_str());
 	uvRect.width  = text.getSize().x / float(imageCount.x);
 	uvRect.height = text.getSize().y / float(imageCount.y);
 
 }
+
 
 Animation::~Animation()
 {
@@ -48,9 +49,12 @@ void Animation::Update(int row, float deltaTime, bool faceRight)
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, const Animation& an)
+
+void Animation::setImageCount(sf::Vector2u imageCount)
 {
-	os << an.frozen << ',' << an.imageCount.x << '-' << an.imageCount.y
-		<< ',' << an.switchTime;
-	return os;
+	this->imageCount = imageCount;
+}
+void Animation::setSwitchTime(float switchTime)
+{
+	this->switchTime = switchTime;
 }

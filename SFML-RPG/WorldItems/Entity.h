@@ -4,12 +4,12 @@
 class Entity
 {
 public:
-	Entity(const char* name, const char* texturePath, sf::Texture* text);
+	Entity(std::string name, std::string texturePath, sf::Texture* text);
 	Entity(const Entity& copy);
 	~Entity();
 
 public:
-	const char* name;
+	std::string name;
 	sf::RectangleShape txtr;
 };
 
