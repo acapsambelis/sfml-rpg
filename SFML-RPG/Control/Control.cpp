@@ -21,34 +21,6 @@ void Control::InitializeWorld()
 	display.InitializeWorld(world);
 }
 
-void Control::GenerateWorld()
-{
-	std::unordered_map<int, WorldObject> worldMap;
-	std::unordered_set<int> collID;
-
-	int ID = 0;
-	// Grass
-	WorldObject ironBox(
-		/*Metadata*/ "IronBox", 00, sf::Vector2f(0.0f, 0.0f),
-		/*Textures*/ sf::IntRect(52, 52, 50, 50)
-	);
-	ObjectDisperse i(ironBox, sf::Vector2f(1000, 1000), 0.1f);
-	ID = i.Disperse(ID, worldMap, collID);
-
-	// Stump
-	WorldObject box(
-		/*Metadata*/ "Box", 00, sf::Vector2f(0.0f, 0.0f),
-		/*Textures*/ sf::IntRect(52, 1, 50, 50)
-	);
-	worldMap[0] = box;
-	collID.insert(0);
-	ObjectDisperse b(box, sf::Vector2f(1000, 1000), 0.5f);
-	ID = b.Disperse(ID, worldMap, collID);
-
-	this->world = World(sf::IntRect(1, 52, 50, 50), worldMap, collID);
-	display.InitializeWorld(world);
-}
-
 void Control::Loop()
 {
 	float deltaTime = 0.0f;
@@ -71,13 +43,17 @@ void Control::Loop()
 	display.Close();
 }
 
+void Control::Save()
+{
+	saveMachine.savePlayer("Saves/Test.txt", this->player);
+	saveMachine.saveWorld("Saves/World.txt", this->world);
+}
+
 void Control::Play()
 {
 	InitializePlayer();
-
-	GenerateWorld();
-	//InitializeWorld();
+	InitializeWorld();
 
 	Loop();
-	saveMachine.savePlayer("Saves/Test.txt", this->player);
+	Save();
 }

@@ -103,5 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Saves\Test.txt" />
+    <Text Include="Saves\TestCopy.txt" />
+    <Text Include="Saves\World.txt" />
+    <Text Include="Saves\WorldCopy.txt" />
   </ItemGroup>
 </Project>

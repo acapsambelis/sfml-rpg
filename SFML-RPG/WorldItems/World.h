@@ -10,12 +10,14 @@ class World : public Displayable
 {
 public:
 	World();
-	World(sf::IntRect rect,
+	World(sf::Vector2f position, sf::IntRect rect,
 		std::unordered_map<int, WorldObject> worldI,
 		std::unordered_set<int> collID);
 	~World();
 
 	void SetObjSprite(sf::Texture& text);
+
+	std::string GetWriteable();
 
 public:
 	std::unordered_map<int, WorldObject> worldItems;

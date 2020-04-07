@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <unordered_map>
+#include <unordered_set>
 
 class SaveMachine
 {

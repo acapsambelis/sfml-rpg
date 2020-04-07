@@ -7,10 +7,10 @@ World::World() :
 {
 }
 
-World::World(sf::IntRect rect,
+World::World(sf::Vector2f position, sf::IntRect rect,
 	std::unordered_map<int, WorldObject> worldI,
 	std::unordered_set<int> collID) :
-	Displayable(rect, sf::Vector2f(0.0f, 0.0f))
+	Displayable(rect, position)
 {
 	this->worldItems = worldI;
 	this->collID = collID;
@@ -26,5 +26,28 @@ void World::SetObjSprite(sf::Texture& text)
 	{
 		worldItems[i].SetSprite(text);
 	}
+}
+
+std::string World::GetWriteable()
+{
+	std::string write = Displayable::GetWriteable();
+	write += "\n-.";
+
+	std::unordered_map<int, WorldObject>::iterator it = worldItems.begin();
+
+	while (it != worldItems.end())
+	{
+		write += "\n";
+		write += it->second.GetWriteable();
+		write += "\n-";
+		it++;
+	}
+	write += ".\n";
+
+	for (auto ID : collID) {
+		write += std::to_string(ID) + ',';
+	}
+
+	return write;
 }
 
