@@ -1,25 +1,24 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "Displayable.h"
+
 #include "WorldObject.h"
-#include <vector>
+#include <unordered_map>
 #include <unordered_set>
 
-class World
+class World : public Displayable
 {
 public:
-	World(sf::Texture* texture, std::unordered_set<WorldObject, MyHashFunction> &worldI,
-		std::unordered_set<WorldObject, MyHashFunction>& coll);
+	World();
+	World(sf::IntRect rect,
+		std::unordered_map<int, WorldObject> worldI,
+		std::unordered_set<int> collID);
 	~World();
 
-	void Draw(sf::RenderWindow& window);
+	void SetObjSprite(sf::Texture& text);
 
 public:
-	std::unordered_set<WorldObject, MyHashFunction>& collideables;
-	std::unordered_set<WorldObject, MyHashFunction>& worldItems;
-
-
-private:
-	sf::RectangleShape ground;
-
+	std::unordered_map<int, WorldObject> worldItems;
+	std::unordered_set<int> collID;
 };
 

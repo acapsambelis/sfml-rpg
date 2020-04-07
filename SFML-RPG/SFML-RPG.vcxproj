@@ -144,11 +144,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Character\Animation.cpp" />
     <ClCompile Include="Character\Character.cpp" />
-    <ClCompile Include="Control\Game.cpp" />
-    <ClCompile Include="WorldItems\Entity.cpp" />
-    <ClCompile Include="Control\Gui.cpp" />
+    <ClCompile Include="Control\Control.cpp" />
+    <ClCompile Include="Control\Logic\Game.cpp" />
+    <ClCompile Include="Control\Graphics\Gui.cpp" />
+    <ClCompile Include="Control\Graphics\ResourceManager.cpp" />
+    <ClCompile Include="Control\Graphics\Display.cpp" />
+    <ClCompile Include="Control\SaveMachine.cpp" />
+    <ClCompile Include="WorldItems\Displayable.cpp" />
     <ClCompile Include="WorldItems\ObjectDisperse.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Character\Player.cpp" />
@@ -156,17 +159,21 @@
     <ClCompile Include="WorldItems\WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character\Animation.h" />
     <ClInclude Include="Character\Character.h" />
-    <ClInclude Include="Control\Game.h" />
-    <ClInclude Include="WorldItems\Entity.h" />
-    <ClInclude Include="Control\Gui.h" />
+    <ClInclude Include="Control\Control.h" />
+    <ClInclude Include="Control\Logic\Game.h" />
+    <ClInclude Include="Control\Graphics\Gui.h" />
+    <ClInclude Include="Control\Graphics\ResourceManager.h" />
+    <ClInclude Include="Control\Graphics\Display.h" />
+    <ClInclude Include="Control\SaveMachine.h" />
+    <ClInclude Include="WorldItems\Displayable.h" />
     <ClInclude Include="WorldItems\ObjectDisperse.h" />
     <ClInclude Include="Character\Player.h" />
     <ClInclude Include="WorldItems\World.h" />
     <ClInclude Include="WorldItems\WorldObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ImageRec\atlas.png" />
     <Image Include="ImageRec\box.png" />
     <Image Include="ImageRec\grass_blade.png" />
     <Image Include="ImageRec\ground_terrain.png" />
@@ -175,6 +182,7 @@
     <Image Include="ImageRec\pixel_stump.png" />
     <Image Include="ImageRec\player_texture.png" />
     <Image Include="ImageRec\slime.jpg" />
+    <Image Include="ImageRec\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

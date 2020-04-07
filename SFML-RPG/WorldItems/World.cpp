@@ -1,22 +1,30 @@
 #include "World.h"
 #include <SFML\Graphics.hpp>
+#include <iostream>
 
-World::World(sf::Texture* texture, std::unordered_set<WorldObject, MyHashFunction> &worldI,
-	std::unordered_set<WorldObject, MyHashFunction>& coll) :
-	worldItems(worldI),
-	collideables(coll)
+World::World() :
+	Displayable()
 {
-	ground.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	ground.setOrigin(ground.getSize() / 2.0f);
-	ground.setTexture(texture);
+}
+
+World::World(sf::IntRect rect,
+	std::unordered_map<int, WorldObject> worldI,
+	std::unordered_set<int> collID) :
+	Displayable(rect, sf::Vector2f(0.0f, 0.0f))
+{
+	this->worldItems = worldI;
+	this->collID = collID;
 }
 
 World::~World()
 {
 }
 
-void World::Draw(sf::RenderWindow& window)
+void World::SetObjSprite(sf::Texture& text)
 {
-	window.draw(ground);
+	for (int i = 0; i < worldItems.size(); i++)
+	{
+		worldItems[i].SetSprite(text);
+	}
 }
 

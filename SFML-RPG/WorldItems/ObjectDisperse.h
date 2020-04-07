@@ -1,6 +1,7 @@
 #pragma once
 #include "WorldObject.h"
 #include <vector>
+#include <unordered_map>
 #include <unordered_set>
 #include <SFML\Graphics.hpp>
 
@@ -10,12 +11,11 @@ public:
 	ObjectDisperse(WorldObject obj, sf::Vector2f range, float num);
 	~ObjectDisperse();
 
-
 	int Disperse(int nextID,
-		std::unordered_set<WorldObject, MyHashFunction>& set,
-		std::unordered_set<WorldObject, MyHashFunction>& set2);
+		std::unordered_map<int, WorldObject>& map,
+		std::unordered_set<int>& set);
 	int Disperse(int nextID,
-		std::unordered_set<WorldObject, MyHashFunction>& set);
+		std::unordered_map<int, WorldObject>& map);
 
 public:
 	WorldObject objType;

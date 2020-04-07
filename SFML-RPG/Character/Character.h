@@ -5,13 +5,11 @@
 class Character : public WorldObject
 {
 public:
+	Character();
 	Character(
 		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-		/*Texture*/ std::string texture, sf::Texture* text,
-		/*Collision*/ float weight,
-		/*Animation*/ bool frozen, 
-				sf::Vector2u imageCount, float switchTime,
-		/*Character*/ float health, float speed, float strength
+		/*Texture*/ sf::IntRect rect,
+		/*Character*/ float health, float speed
 	);
 	Character(const Character& cpy, int ID, sf::Vector2f position);
 	~Character();
@@ -20,7 +18,6 @@ public:
 
 	float health;
 	float speed;
-	float strength;
 
 	int state;
 };

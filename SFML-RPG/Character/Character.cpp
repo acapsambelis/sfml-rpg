@@ -1,22 +1,19 @@
 #include "Character.h"
 
+Character::Character()
+{
+}
+
 Character::Character(
 	/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-	/*Texture*/ std::string texture, sf::Texture* text,
-	/*Collision*/ float weight,
-	/*Animation*/ bool frozen, 
-			sf::Vector2u imageCount, float switchTime,
-	/*Character*/ float health, float speed, float strength
+	/*Texture*/ sf::IntRect rect,
+	/*Character*/ float health, float speed
 	) :
-	WorldObject(name, ID, position,
-		texture, texture,
-		text, text,
-		weight,
-		frozen, imageCount, switchTime)
+	WorldObject(name, ID, position, 
+		rect)
 {
 	this->health = health;
 	this->speed = speed;
-	this->strength = strength;
 
 	this->state = 0;
 }
@@ -26,7 +23,6 @@ Character::Character(const Character& cpy, int ID, sf::Vector2f position) :
 {
 	this->health = cpy.health;
 	this->speed = cpy.speed;
-	this->strength = cpy.strength;
 
 	this->state = 0;
 }

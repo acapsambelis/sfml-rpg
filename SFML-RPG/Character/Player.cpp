@@ -5,28 +5,24 @@
 #include <string>
 #include <vector>
 
+Player::Player()
+{
+}
 
 Player::Player(
 	/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-	/*Texture*/ std::string texturePath, sf::Texture* text,
-	/*Collision*/ float weight,
-	/*Animation*/ bool frozen,
-				sf::Vector2u imageCount, float switchTime,
-	/*Character*/ float health, float speed, float strength
+	/*Texture*/ sf::IntRect rect,
+	/*Character*/ float health, float speed
 	) :
 	Character(name, ID, position,
-		texturePath, text,
-		weight,
-		frozen, imageCount, switchTime,
-		health, speed, strength)
+		rect,
+		health, speed)
 {
-	this->inventory = std::vector<Entity>();
 }
 
 Player::Player(const Player& cpy, int ID, sf::Vector2f position) :
 	Character(cpy, ID, position)
 {
-	this->inventory = std::vector<Entity>();
 }
 
 Player::~Player()
@@ -63,47 +59,25 @@ void Player::Update(float deltaTime)
 		state = 2;
 	}
 
-	if (movement.x == 0.0f)
-	{
-		row = 0;
-	}
-	else {
-		row = 1;
-		if (movement.x > 0.0f)
-		{
-			faceRight = true;
-		}
-		else
-		{
-			faceRight = false;
-		}
-	}
 
-	if (!animation.frozen)
-	{
-		animation.Update(row, deltaTime, faceRight);
-	}
-	body.setTextureRect(animation.uvRect);
 	Move(movement.x, movement.y);
 }
 
-bool Player::Collide(WorldObject& other, sf::View vw)
+bool Player::Collide(WorldObject& other)
 {
-	bool coll = UpdateCollision(other, vw);
+	bool coll = UpdateCollision(other);
 	if (coll && state == 2)
 	{
 		if (health > 0) 
 		{
-			this->inventory.push_back(Mine(other));
+			Mine(other);
 			return true;
 		}
 	}
 	return false;
 }
 
-Entity Player::Mine(WorldObject& other)
+void Player::Mine(WorldObject& other)
 {
-	Entity temp(other.ent);
 	this->health -= 10.0f;
-	return temp;
 }
