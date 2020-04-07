@@ -3,6 +3,7 @@
 SaveMachine::SaveMachine()
 {
 	this->in = std::ifstream();
+	this->out = std::ofstream();
 }
 
 SaveMachine::~SaveMachine()
@@ -20,9 +21,6 @@ std::vector<std::string> SaveMachine::Split(std::string split, char delimeter)
 	}
 	return splittedStrings;
 }
-
-
-
 
 //"../Saves/Test.txt"
 Player SaveMachine::loadPlayer(std::string path)
@@ -58,4 +56,26 @@ Player SaveMachine::loadPlayer(std::string path)
 	return Player(name, std::stoi(id), sf::Vector2f(std::stof(posTokens[0]), std::stof(posTokens[1])),
 		sf::IntRect(std::stof(rectTokens[0]), std::stof(rectTokens[1]), std::stof(rectTokens[2]), std::stof(rectTokens[3])),
 		std::stof(health), std::stof(speed));
+}
+
+World SaveMachine::loadWorld(std::string path)
+{
+	return World();
+}
+
+void SaveMachine::savePlayer(std::string path, Player player)
+{
+	out.open(path);
+	if (!out)
+	{
+		std::cout << "Unable to open file" << std::endl;
+		exit(1);
+	}
+	out << player.GetWriteable();
+
+	out.close();
+}
+
+void SaveMachine::saveWorld(std::string path, World world)
+{
 }

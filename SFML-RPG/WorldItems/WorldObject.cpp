@@ -1,5 +1,4 @@
 #include "WorldObject.h"
-#include "..\Character\Player.h"
 
 WorldObject::WorldObject()
 {
@@ -44,6 +43,11 @@ bool WorldObject::UpdateCollision(WorldObject& other)
 	}
 	
 	return false;
+}
+
+std::string WorldObject::GetWriteable()
+{
+	return name + '\n' + std::to_string(ID) + '\n' + Displayable::GetWriteable();
 }
 
 sf::Vector3f WorldObject::CheckCollision(WorldObject other)

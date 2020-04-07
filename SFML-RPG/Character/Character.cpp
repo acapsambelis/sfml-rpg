@@ -30,3 +30,8 @@ Character::Character(const Character& cpy, int ID, sf::Vector2f position) :
 Character::~Character()
 {
 }
+
+std::string Character::GetWriteable()
+{
+	return WorldObject::GetWriteable() + '\n' + std::to_string(health) + '\n' + std::to_string(speed);
+}

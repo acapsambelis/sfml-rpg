@@ -36,22 +36,22 @@ void Player::Update(float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		state = 1;
-		movement.x -= speed * deltaTime;
+		movement.x -= getSpeed() * deltaTime;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
 	{
 		state = 1;
-		movement.x += speed * deltaTime;
+		movement.x += getSpeed() * deltaTime;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
 	{
 		state = 1;
-		movement.y -= speed * deltaTime;
+		movement.y -= getSpeed() * deltaTime;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
 	{
 		state = 1;
-		movement.y += speed * deltaTime;
+		movement.y += getSpeed() * deltaTime;
 	}
 		
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
@@ -68,7 +68,7 @@ bool Player::Collide(WorldObject& other)
 	bool coll = UpdateCollision(other);
 	if (coll && state == 2)
 	{
-		if (health > 0) 
+		if (getHealth() > 0)
 		{
 			Mine(other);
 			return true;
@@ -79,5 +79,10 @@ bool Player::Collide(WorldObject& other)
 
 void Player::Mine(WorldObject& other)
 {
-	this->health -= 10.0f;
+	this->Damage(10.0f);
+}
+
+std::string Player::GetWriteable()
+{
+	return Character::GetWriteable();
 }

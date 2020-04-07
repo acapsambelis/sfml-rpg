@@ -17,9 +17,15 @@ void Control::InitializePlayer()
 
 void Control::InitializeWorld()
 {
+	this->world = saveMachine.loadWorld("Saves/World.txt");
+	display.InitializeWorld(world);
+}
+
+void Control::GenerateWorld()
+{
 	std::unordered_map<int, WorldObject> worldMap;
 	std::unordered_set<int> collID;
-	
+
 	int ID = 0;
 	// Grass
 	WorldObject ironBox(
@@ -68,7 +74,10 @@ void Control::Loop()
 void Control::Play()
 {
 	InitializePlayer();
-	InitializeWorld();
+
+	GenerateWorld();
+	//InitializeWorld();
 
 	Loop();
+	saveMachine.savePlayer("Saves/Test.txt", this->player);
 }

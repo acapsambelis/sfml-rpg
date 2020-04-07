@@ -30,5 +30,5 @@ void Gui::Draw(sf::RenderWindow& window)
 
 void Gui::Update(Player player)
 {
-	healthbar.setSize(sf::Vector2f(player.health, 8.0f));
+	healthbar.setSize(sf::Vector2f(player.getHealth(), 8.0f));
 }

@@ -13,11 +13,14 @@ public:
 	WorldObject(const WorldObject& cpy, int ID, sf::Vector2f position);
 	~WorldObject();
 
-	// Overloads //
 	bool operator==(const WorldObject& w) const;
 
-	// Collisions //
+	std::string getName() { return name; }
+	int getID() { return ID; }
+
 	bool UpdateCollision(WorldObject& other);
+
+	std::string GetWriteable();
 
 private:
 	sf::Vector3f CheckCollision(WorldObject other);
@@ -25,11 +28,7 @@ private:
 	sf::Vector2f FindDelta(WorldObject other);
 	void Bounce(WorldObject& other, sf::Vector3f react);
 
-
-public:
-	int ID;
 private:
+	int ID;
 	std::string name;
-	sf::IntRect rect;
-
 };

@@ -24,6 +24,8 @@ public:
 
 	void Mine(WorldObject& other);
 
+	std::string GetWriteable();
+
 	/*
 	STATES
 	0. Stationary

@@ -14,11 +14,18 @@ public:
 	Character(const Character& cpy, int ID, sf::Vector2f position);
 	~Character();
 
-public:
+	float getHealth() { return health; }
+	float getSpeed() { return speed; }
 
+	void Damage(float amount) { health -= amount; }
+	void Heal(float amount) { health += amount; }
+
+	std::string GetWriteable();
+
+protected:
+	int state;
+private:
 	float health;
 	float speed;
-
-	int state;
 };
 

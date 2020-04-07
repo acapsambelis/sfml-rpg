@@ -17,6 +17,10 @@ public:
 	void InitializePlayer();
 	void InitializeWorld();
 
+
+	void GenerateWorld();
+
+
 	void Loop();
 
 	void Play();

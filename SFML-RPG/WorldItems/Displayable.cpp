@@ -73,3 +73,10 @@ void Displayable::Draw(sf::RenderWindow& window, sf::View vw, bool force)
 		window.draw(spr);
 	}
 }
+
+std::string Displayable::GetWriteable()
+{
+	return std::to_string(getPosition().x) + "," + std::to_string(getPosition().y) + '\n' +
+		std::to_string(getRect().left) + ',' + std::to_string(getRect().top) + ',' +
+		std::to_string(getRect().width) + ',' + std::to_string(getRect().height);
+}
