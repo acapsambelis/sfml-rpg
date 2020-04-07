@@ -11,11 +11,7 @@ Control::~Control()
 
 void Control::InitializePlayer()
 {
-	this->player = Player(
-		/*Metadata*/ "Player", -1, sf::Vector2f(100.0f, 100.0f),
-		/*Texture*/ sf::IntRect(1, 1, 50, 50),
-		/*Character*/ 100.0f, 100.0f
-	);
+	this->player = saveMachine.loadPlayer("Saves/Test.txt");
 	display.InitializePlayer(player);
 }
 

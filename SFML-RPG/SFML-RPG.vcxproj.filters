@@ -45,13 +45,10 @@
     <ClCompile Include="Control\Logic\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Control\SaveMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Control\Graphics\ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WorldItems\Displayable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\SaveMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,33 +80,15 @@
     <ClInclude Include="Control\Logic\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\SaveMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\Graphics\ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WorldItems\Displayable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\SaveMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ImageRec\box.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ImageRec\player_texture.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ImageRec\ground_terrain.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ImageRec\iron_box.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="ImageRec\pixel_stump.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ImageRec\pixel_grass.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ImageRec\grass_blade.png">
@@ -121,8 +100,8 @@
     <Image Include="ImageRec\atlas.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ImageRec\test.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Saves\Test.txt" />
   </ItemGroup>
 </Project>

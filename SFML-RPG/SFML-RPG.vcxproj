@@ -148,7 +148,6 @@
     <ClCompile Include="Control\Control.cpp" />
     <ClCompile Include="Control\Logic\Game.cpp" />
     <ClCompile Include="Control\Graphics\Gui.cpp" />
-    <ClCompile Include="Control\Graphics\ResourceManager.cpp" />
     <ClCompile Include="Control\Graphics\Display.cpp" />
     <ClCompile Include="Control\SaveMachine.cpp" />
     <ClCompile Include="WorldItems\Displayable.cpp" />
@@ -163,7 +162,6 @@
     <ClInclude Include="Control\Control.h" />
     <ClInclude Include="Control\Logic\Game.h" />
     <ClInclude Include="Control\Graphics\Gui.h" />
-    <ClInclude Include="Control\Graphics\ResourceManager.h" />
     <ClInclude Include="Control\Graphics\Display.h" />
     <ClInclude Include="Control\SaveMachine.h" />
     <ClInclude Include="WorldItems\Displayable.h" />
@@ -174,15 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\atlas.png" />
-    <Image Include="ImageRec\box.png" />
     <Image Include="ImageRec\grass_blade.png" />
-    <Image Include="ImageRec\ground_terrain.png" />
-    <Image Include="ImageRec\iron_box.png" />
-    <Image Include="ImageRec\pixel_grass.png" />
     <Image Include="ImageRec\pixel_stump.png" />
-    <Image Include="ImageRec\player_texture.png" />
     <Image Include="ImageRec\slime.jpg" />
-    <Image Include="ImageRec\test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Saves\Test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
