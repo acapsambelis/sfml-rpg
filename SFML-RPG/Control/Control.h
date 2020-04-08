@@ -26,6 +26,7 @@ public:
 
 private:
 	bool playing;
+	bool reload;
 
 	Player player;
 	World world;

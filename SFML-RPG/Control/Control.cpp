@@ -3,6 +3,7 @@
 Control::Control()
 {
 	playing = true;
+	reload = false;
 }
 
 Control::~Control()
@@ -34,12 +35,12 @@ void Control::Loop()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			playing = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
+		{
+			reload = true;
 			break;
+		}
+			
 	}
-	if (!playing)
-		display.Close();
-	else
-		Reload();
 }
 
 void Control::Reload()
@@ -87,6 +88,15 @@ void Control::Play()
 	InitializePlayer();
 	InitializeWorld();
 
-	Loop();
+	while (playing)
+	{
+		Loop();
+		if (reload)
+		{
+			sf::sleep(sf::Time(sf::seconds(0.25f)));
+			Reload();
+		}
+	}
+	display.Close();
 	Save();
 }
