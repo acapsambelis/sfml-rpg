@@ -102,9 +102,9 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Saves\Test.txt" />
-    <Text Include="Saves\TestCopy.txt" />
     <Text Include="Saves\World.txt" />
-    <Text Include="Saves\WorldCopy.txt" />
+    <Text Include="Saves\PlayerBackup.txt" />
+    <Text Include="Saves\WorldBackup.txt" />
+    <Text Include="Saves\Player.txt" />
   </ItemGroup>
 </Project>

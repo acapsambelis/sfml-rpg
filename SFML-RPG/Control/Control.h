@@ -1,5 +1,4 @@
 #pragma once
-#include <SFML\Graphics.hpp>
 #include "Logic\Game.h"
 #include "Graphics\Display.h"
 #include "SaveMachine.h"
@@ -18,6 +17,9 @@ public:
 	void InitializeWorld();
 
 	void Loop();
+
+	void Reload();
+
 	void Save();
 
 	void Play();

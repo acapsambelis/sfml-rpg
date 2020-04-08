@@ -89,19 +89,23 @@ World SaveMachine::loadWorld(std::string path)
 	in >> x;
 	do {
 		in >> name;
-		in >> id;		
-		in >> pos;
-		posTokens = Split(pos, ',');
-		in >> rect;
-		rectTokens = Split(rect, ',');
+		if (name.compare("0")) 
+		{
+			in >> id;		
+			in >> pos;
+			posTokens = Split(pos, ',');
+			in >> rect;
+			rectTokens = Split(rect, ',');
 
-		obj = WorldObject(name, std::stoi(id), sf::Vector2f(std::stof(posTokens[0]), std::stof(posTokens[1])), 
-			sf::IntRect(std::stof(rectTokens[0]), std::stof(rectTokens[1]),
-						std::stof(rectTokens[2]), std::stof(rectTokens[3])));
+			obj = WorldObject(name, std::stoi(id), sf::Vector2f(std::stof(posTokens[0]), std::stof(posTokens[1])), 
+				sf::IntRect(std::stof(rectTokens[0]), std::stof(rectTokens[1]),
+							std::stof(rectTokens[2]), std::stof(rectTokens[3])));
 
-		worldItems[std::stoi(id)] = obj;
+			worldItems[std::stoi(id)] = obj;
 
-		in >> x;
+			in >> x;
+		}
+		
 	} while (x.compare("-.") != 0);
 
 	std::string coll;

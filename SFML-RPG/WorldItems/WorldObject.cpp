@@ -1,7 +1,10 @@
 #include "WorldObject.h"
 
-WorldObject::WorldObject()
+WorldObject::WorldObject() :
+	Displayable()
 {
+	this->ID = 0;
+	this->name = "";
 }
 
 // NEW //

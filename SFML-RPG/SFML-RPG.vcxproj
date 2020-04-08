@@ -177,10 +177,10 @@
     <Image Include="ImageRec\slime.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Saves\TestCopy.txt" />
-    <Text Include="Saves\Test.txt" />
+    <Text Include="Saves\PlayerBackup.txt" />
+    <Text Include="Saves\Player.txt" />
     <Text Include="Saves\World.txt" />
-    <Text Include="Saves\WorldCopy.txt" />
+    <Text Include="Saves\WorldBackup.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

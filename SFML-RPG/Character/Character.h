@@ -7,9 +7,9 @@ class Character : public WorldObject
 public:
 	Character();
 	Character(
-		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-		/*Texture*/ sf::IntRect rect,
-		/*Character*/ float health, float speed
+		std::string name, int ID, sf::Vector2f position,
+		sf::IntRect rect,
+		float health, float speed
 	);
 	Character(const Character& cpy, int ID, sf::Vector2f position);
 	~Character();

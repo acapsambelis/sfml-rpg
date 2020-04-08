@@ -2,12 +2,16 @@
 
 Character::Character()
 {
+	this->health = 0.0f;
+	this->speed = 0.0f;
+
+	this->state = 0;
 }
 
 Character::Character(
-	/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-	/*Texture*/ sf::IntRect rect,
-	/*Character*/ float health, float speed
+	std::string name, int ID, sf::Vector2f position,
+	sf::IntRect rect,
+	float health, float speed
 	) :
 	WorldObject(name, ID, position, 
 		rect)

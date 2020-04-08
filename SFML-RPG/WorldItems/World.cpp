@@ -1,6 +1,4 @@
 #include "World.h"
-#include <SFML\Graphics.hpp>
-#include <iostream>
 
 World::World() :
 	Displayable()
@@ -37,9 +35,12 @@ std::string World::GetWriteable()
 
 	while (it != worldItems.end())
 	{
-		write += "\n";
-		write += it->second.GetWriteable();
-		write += "\n-";
+		if(it->second.getName().compare(""))
+		{
+			write += "\n";
+			write += it->second.GetWriteable();
+			write += "\n-";
+		}
 		it++;
 	}
 	write += ".\n";

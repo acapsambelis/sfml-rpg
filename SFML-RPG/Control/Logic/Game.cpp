@@ -1,16 +1,17 @@
 #include "Game.h"
-#include <unordered_set>
 
 Game::Game()
 {
+	this->deltaTime = 0.0f;
 }
 
 Game::~Game()
 {
 }
 
-void Game::Run(float deltaTime, Player& player, World& world)
+void Game::Run(Player& player, World& world)
 {
+	this->deltaTime = this->clock.restart().asSeconds();
 	player.Update(deltaTime);
 	Collide(player, world);
 }
