@@ -51,9 +51,6 @@
     <ClCompile Include="Control\SaveMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Control\Logic\Keys.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character\Character.h">
@@ -89,17 +86,8 @@
     <ClInclude Include="Control\SaveMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\Logic\Keys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ImageRec\pixel_stump.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ImageRec\grass_blade.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="ImageRec\slime.jpg">
       <Filter>Resource Files</Filter>
     </Image>
@@ -108,9 +96,9 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Saves\World.txt" />
-    <Text Include="Saves\PlayerBackup.txt" />
-    <Text Include="Saves\WorldBackup.txt" />
-    <Text Include="Saves\Player.txt" />
+    <Text Include="Saves\Player.arpg" />
+    <Text Include="Saves\PlayerBackup.arpg" />
+    <Text Include="Saves\World.arpg" />
+    <Text Include="Saves\WorldBackup.arpg" />
   </ItemGroup>
 </Project>

@@ -1,30 +1,34 @@
 #pragma once
-#include <SFML\Graphics.hpp>
-#include "..\Character\Player.h"
-#include "..\WorldItems\World.h"
+
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
 
-class SaveMachine
-{
-public:
-	SaveMachine();
-	~SaveMachine();
+#include <SFML\Graphics.hpp>
 
-	std::vector<std::string> Split(std::string split, char delimeter);
+#include "Character\Player.h"
+#include "WorldItems\World.h"
 
-	Player loadPlayer(std::string path);
-	World loadWorld(std::string path);
+namespace rpg {
+	class SaveMachine
+	{
+	public:
+		SaveMachine();
+		~SaveMachine();
 
-	void savePlayer(std::string path, Player player);
-	void saveWorld(std::string path, World world);
+		std::vector<std::string> Split(std::string split, char delimeter);
 
-private:
-	std::ifstream in;
-	std::ofstream out;
+		Player loadPlayer(std::string path);
+		World loadWorld(std::string path);
 
-};
+		void savePlayer(std::string path, Player player);
+		void saveWorld(std::string path, World world);
 
+	private:
+		std::ifstream in;
+		std::ofstream out;
+
+	};
+}

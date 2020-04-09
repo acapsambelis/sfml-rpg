@@ -2,38 +2,41 @@
 #include "Logic\Game.h"
 #include "Graphics\Display.h"
 #include "SaveMachine.h"
-#include "..\Character\Player.h"
-#include "..\WorldItems\World.h"
-#include "..\WorldItems\WorldObject.h"
-#include "..\WorldItems\ObjectDisperse.h"
+#include "Character\Player.h"
+#include "WorldItems\World.h"
+#include "WorldItems\WorldObject.h"
+#include "WorldItems\ObjectDisperse.h"
 
-class Control
-{
-public:
-	Control();
-	~Control();
+namespace rpg {
+	class Control
+	{
+	public:
+		Control();
+		~Control();
 
-	void InitializePlayer();
-	void InitializeWorld();
+		void InitializePlayer();
+		void InitializeWorld();
 
-	void Loop();
+		void Loop();
 
-	void Reload();
+		void Reload();
 
-	void Save();
+		void Save();
 
-	void Play();
+		void Play();
 
-private:
-	bool playing;
-	bool reload;
+	private:
+		bool playing;
+		bool reload;
 
-	Player player;
-	World world;
+		Player player;
+		World world;
 
-	SaveMachine saveMachine;
+		SaveMachine saveMachine;
 
-	Game game;
-	Display display;
-};
+		Game game;
+		Display display;
+	};
+}
+
 

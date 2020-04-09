@@ -1,35 +1,37 @@
 #pragma once
-#include <SFML\Graphics.hpp>
-#include "Character.h"
-#include "..\WorldItems\WorldObject.h"
 
 #include <vector>
 #include <iostream>
 
-class Player : public Character
-{
-public:
-	Player();
-	Player(
-		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-		/*Texture*/ sf::IntRect rect,
-		/*Character*/ float health, float speed
-	);
-	Player(const Player& cpy, int ID, sf::Vector2f position);
-	~Player();
+#include <SFML\Graphics.hpp>
 
-	void Update(float deltaTime);
+#include "Character.h"
+#include "WorldItems\WorldObject.h"
 
-	bool Collide(WorldObject& other);
+namespace rpg {
+	class Player : public Character
+	{
+	public:
+		Player();
+		Player(
+			/*Metadata*/ std::string name, int ID, sf::Vector2f position,
+			/*Texture*/ sf::IntRect rect,
+			/*Character*/ float health, float speed
+		);
+		Player(const Player& cpy, int ID, sf::Vector2f position);
+		~Player();
 
-	void Mine(WorldObject& other);
+		bool Collide(WorldObject& other);
 
-	std::string GetWriteable();
+		void Mine(WorldObject& other);
 
-	/*
-	STATES
-	0. Stationary
-	1. Moving
-	2. Mining	
-	*/
-};
+		std::string GetWriteable();
+
+		/*
+		STATES
+		0. Stationary
+		1. Moving
+		2. Mining
+		*/
+	};
+}

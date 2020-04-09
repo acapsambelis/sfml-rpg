@@ -1,41 +1,44 @@
 #include "Character.h"
 
-Character::Character()
-{
-	this->health = 0.0f;
-	this->speed = 0.0f;
+namespace rpg {
 
-	this->state = 0;
-}
+	Character::Character()
+	{
+		this->health = 0.0f;
+		this->speed = 0.0f;
 
-Character::Character(
-	std::string name, int ID, sf::Vector2f position,
-	sf::IntRect rect,
-	float health, float speed
+		this->state = 0;
+	}
+
+	Character::Character(
+		std::string name, int ID, sf::Vector2f position,
+		sf::IntRect rect,
+		float health, float speed
 	) :
-	WorldObject(name, ID, position, 
-		rect)
-{
-	this->health = health;
-	this->speed = speed;
+		WorldObject(name, ID, position,
+			rect)
+	{
+		this->health = health;
+		this->speed = speed;
 
-	this->state = 0;
-}
+		this->state = 0;
+	}
 
-Character::Character(const Character& cpy, int ID, sf::Vector2f position) :
-	WorldObject(cpy, ID, position)
-{
-	this->health = cpy.health;
-	this->speed = cpy.speed;
+	Character::Character(const Character& cpy, int ID, sf::Vector2f position) :
+		WorldObject(cpy, ID, position)
+	{
+		this->health = cpy.health;
+		this->speed = cpy.speed;
 
-	this->state = 0;
-}
+		this->state = 0;
+	}
 
-Character::~Character()
-{
-}
+	Character::~Character()
+	{
+	}
 
-std::string Character::GetWriteable()
-{
-	return WorldObject::GetWriteable() + '\n' + std::to_string(health) + '\n' + std::to_string(speed);
+	std::string Character::GetWriteable()
+	{
+		return WorldObject::GetWriteable() + '\n' + std::to_string(health) + '\n' + std::to_string(speed);
+	}
 }

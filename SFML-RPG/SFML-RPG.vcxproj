@@ -71,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -150,7 +152,6 @@
     <ClCompile Include="Control\Graphics\Gui.cpp" />
     <ClCompile Include="Control\Graphics\Display.cpp" />
     <ClCompile Include="Control\SaveMachine.cpp" />
-    <ClCompile Include="Control\Logic\Keys.cpp" />
     <ClCompile Include="WorldItems\Displayable.cpp" />
     <ClCompile Include="WorldItems\ObjectDisperse.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -165,7 +166,6 @@
     <ClInclude Include="Control\Graphics\Gui.h" />
     <ClInclude Include="Control\Graphics\Display.h" />
     <ClInclude Include="Control\SaveMachine.h" />
-    <ClInclude Include="Control\Logic\Keys.h" />
     <ClInclude Include="WorldItems\Displayable.h" />
     <ClInclude Include="WorldItems\ObjectDisperse.h" />
     <ClInclude Include="Character\Player.h" />
@@ -174,15 +174,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\atlas.png" />
-    <Image Include="ImageRec\grass_blade.png" />
-    <Image Include="ImageRec\pixel_stump.png" />
     <Image Include="ImageRec\slime.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Saves\PlayerBackup.txt" />
-    <Text Include="Saves\Player.txt" />
-    <Text Include="Saves\World.txt" />
-    <Text Include="Saves\WorldBackup.txt" />
+    <Text Include="Saves\PlayerBackup.arpg" />
+    <Text Include="Saves\Player.arpg" />
+    <Text Include="Saves\World.arpg" />
+    <Text Include="Saves\WorldBackup.arpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

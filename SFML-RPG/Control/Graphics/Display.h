@@ -1,33 +1,36 @@
 #pragma once
+
 #include <SFML\Graphics.hpp>
-#include "..\..\Character\Player.h"
-#include "..\..\WorldItems\World.h"
+
+#include "Character\Player.h"
+#include "WorldItems\World.h"
 #include "Gui.h"
 
-class Display
-{
-public:
-	Display();
-	~Display();
+namespace rpg {
+	class Display
+	{
+	public:
+		Display();
+		~Display();
 
-	void InitializePlayer(Player& player);
-	void InitializeWorld(World& world);
+		void InitializePlayer(Player& player);
+		void InitializeWorld(World& world);
 
-	void TickReset(Player player);
-	void DrawTick(Player player, World world);
+		void TickReset(Player player);
+		void DrawTick(Player player, World world);
 
-	void Close();
+		void Close();
 
-private:
-	sf::VideoMode currentMode;
-	sf::RenderWindow window;
+	private:
+		sf::VideoMode currentMode;
+		sf::RenderWindow window;
 
-	sf::View worldView;
-	sf::View guiView;
+		sf::View worldView;
+		sf::View guiView;
 
-	sf::Texture atlas;
+		sf::Texture atlas;
 
-	Gui gui;
+		Gui gui;
 
-};
-
+	};
+}
