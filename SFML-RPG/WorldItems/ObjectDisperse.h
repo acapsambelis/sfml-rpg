@@ -21,7 +21,7 @@ namespace rpg {
 		int Disperse(int nextID,
 			std::unordered_map<int, WorldObject>& map);
 
-	public:
+	private:
 		WorldObject objType;
 		sf::Vector2f range;
 		float popularity;
