@@ -1,31 +1,47 @@
-#include "Game.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "Game.hpp"
 
 namespace rpg {
 
+	////////////////////////////////////////////////////////////
 	Game::Game()
 	{
-		this->deltaTime = 0.0f;
+		this->delta_time = 0.0f;
 	}
 
+	////////////////////////////////////////////////////////////
 	Game::~Game()
 	{
 	}
 
-	void Game::Run(Player& player, World& world)
+	////////////////////////////////////////////////////////////
+	void Game::update(Player& player, World& world)
 	{
-		this->deltaTime = this->clock.restart().asSeconds();
-		sf::Vector2f move = GetInput(player);
-		player.Move(move.x, move.y);
-		Collide(player, world);
+		this->delta_time = this->clock.restart().asSeconds();
+		sf::Vector2f move = get_input(player);
+		player.move(move.x, move.y);
+		collide(player, world);
 	}
 
 
-	void Game::Collide(Player& player, World& world)
+	////////////////////////////////////////////////////////////
+	void Game::collide(Player& player, World& world)
 	{
 		std::unordered_set<int> eraseIDs;
 		for (auto id : world.getCollID())
 		{
-			bool mined = player.Collide(world.getWorldItem(id));
+			bool mined = player.collide(world.get_world_item(id));
 			if (mined)
 			{
 				eraseIDs.insert(id);
@@ -33,40 +49,42 @@ namespace rpg {
 		}
 		for (int id : eraseIDs)
 		{
-			world.DeleteWorldItem(id);
+			world.delete_world_item(id);
 		}
 	}
 
-	sf::Vector2f Game::GetInput(Player& player)
+	////////////////////////////////////////////////////////////
+	sf::Vector2f Game::get_input(Player& player)
 	{
 		sf::Vector2f movement(0.0f, 0.0f);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			player.SetState(1);
-			movement.x -= player.getSpeed() * deltaTime;
+			player.set_state(1);
+			movement.x -= player.get_speed() * delta_time;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			player.SetState(1);
-			movement.x += player.getSpeed() * deltaTime;
+			player.set_state(1);
+			movement.x += player.get_speed() * delta_time;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			player.SetState(1);
-			movement.y -= player.getSpeed() * deltaTime;
+			player.set_state(1);
+			movement.y -= player.get_speed() * delta_time;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			player.SetState(1);
-			movement.y += player.getSpeed() * deltaTime;
+			player.set_state(1);
+			movement.y += player.get_speed() * delta_time;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
-			player.SetState(2);
+			player.set_state(2);
 		}
 
 		return movement;
 	}
-}
+
+} // namespace rpg

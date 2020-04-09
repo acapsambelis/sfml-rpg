@@ -1,56 +1,74 @@
-#include "World.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "World.hpp"
 
 namespace rpg {
 
+	////////////////////////////////////////////////////////////
 	World::World() :
 		Displayable()
 	{
 	}
 
-	World::World(sf::Vector2f position, sf::IntRect rect,
-		std::unordered_map<int, WorldObject> worldI,
-		std::unordered_set<int> collID) :
-		Displayable(rect, position)
+	////////////////////////////////////////////////////////////
+	World::World(sf::Vector2f position, sf::IntRect texture_rect,
+		std::unordered_map<int, WorldObject> world_items,
+		std::unordered_set<int> collision_ids) :
+		Displayable(texture_rect, position)
 	{
-		this->worldItems = worldI;
-		this->collID = collID;
+		this->world_items = world_items;
+		this->collision_ids = collision_ids;
 	}
 
+	////////////////////////////////////////////////////////////
 	World::~World()
 	{
 	}
 
-	void World::SetObjSprite(sf::Texture& text)
+	////////////////////////////////////////////////////////////
+	void World::set_obj_sprite(sf::Texture& text)
 	{
-		for (int i = 0; i < worldItems.size(); i++)
+		for (unsigned int i = 0; i < world_items.size(); i++)
 		{
-			worldItems[i].SetSprite(text);
+			world_items[i].set_sprite(text);
 		}
 	}
 
-	std::string World::GetWriteable()
+	////////////////////////////////////////////////////////////
+	std::string World::get_writeable()
 	{
 		std::string write = Displayable::GetWriteable();
 		write += "\n-.";
 
-		std::unordered_map<int, WorldObject>::iterator it = worldItems.begin();
+		std::unordered_map<int, WorldObject>::iterator it = world_items.begin();
 
-		while (it != worldItems.end())
+		while (it != world_items.end())
 		{
-			if (it->second.getName().compare(""))
+			if (it->second.get_name().compare(""))
 			{
 				write += "\n";
-				write += it->second.GetWriteable();
+				write += it->second.get_writeable();
 				write += "\n-";
 			}
 			it++;
 		}
 		write += ".\n";
 
-		for (auto ID : collID) {
+		for (auto ID : collision_ids) {
 			write += std::to_string(ID) + ',';
 		}
 
 		return write;
 	}
-}
+
+} // namespace rpg

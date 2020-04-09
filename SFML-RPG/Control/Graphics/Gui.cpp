@@ -1,36 +1,54 @@
-#include "Gui.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "Gui.hpp"
 
 namespace rpg {
 
+	////////////////////////////////////////////////////////////
 	Gui::Gui()
 	{
 	}
 
+	////////////////////////////////////////////////////////////
 	Gui::~Gui()
 	{
 	}
 
-	void Gui::Initialize(sf::View guiView)
+	////////////////////////////////////////////////////////////
+	void Gui::initialize(sf::View gui_view)
 	{
-		this->guiView = guiView;
+		this->gui_view = gui_view;
 
 		healthbar = sf::RectangleShape();
 		healthbar.setPosition(
-			this->guiView.getCenter()
-			- (this->guiView.getSize() / 2.0f)
+			this->gui_view.getCenter()
+			- (this->gui_view.getSize() / 2.0f)
 			+ PIXELBUFFER
 		);
 		healthbar.setFillColor(sf::Color(0, 0, 255));
 		sf::Vector2f pos = healthbar.getPosition();
 	}
 
-	void Gui::Draw(sf::RenderWindow& window)
+	////////////////////////////////////////////////////////////
+	void Gui::draw(sf::RenderWindow& window)
 	{
 		window.draw(healthbar);
 	}
 
-	void Gui::Update(Player player)
+	////////////////////////////////////////////////////////////
+	void Gui::update(Player player)
 	{
-		healthbar.setSize(sf::Vector2f(player.getHealth(), 8.0f));
+		healthbar.setSize(sf::Vector2f(player.get_health(), 8.0f));
 	}
-}
+
+} // namespace rpg

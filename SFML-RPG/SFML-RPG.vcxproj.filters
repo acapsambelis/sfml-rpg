@@ -53,37 +53,37 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character\Character.h">
+    <ClInclude Include="Character\Character.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Character\Player.h">
+    <ClInclude Include="Character\Player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\ObjectDisperse.h">
+    <ClInclude Include="Control\Graphics\Display.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\World.h">
+    <ClInclude Include="Control\Graphics\Gui.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\WorldObject.h">
+    <ClInclude Include="Control\Logic\Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\Control.h">
+    <ClInclude Include="Control\Control.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\Graphics\Display.h">
+    <ClInclude Include="Control\SaveMachine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\Graphics\Gui.h">
+    <ClInclude Include="WorldItems\Displayable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\Logic\Game.h">
+    <ClInclude Include="WorldItems\ObjectDisperse.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\Displayable.h">
+    <ClInclude Include="WorldItems\World.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control\SaveMachine.h">
+    <ClInclude Include="WorldItems\WorldObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,58 +1,76 @@
-#include "Control.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "Control.hpp"
 
 namespace rpg {
 
+	////////////////////////////////////////////////////////////
 	Control::Control()
 	{
 		playing = true;
-		reload = false;
+		new_world_gen = false;
 	}
 
+	////////////////////////////////////////////////////////////
 	Control::~Control()
 	{
 	}
 
-	void Control::InitializePlayer()
+	////////////////////////////////////////////////////////////
+	void Control::initialize_player()
 	{
-		this->player = saveMachine.loadPlayer("Saves/Player.arpg");
-		display.InitializePlayer(player);
+		this->player = save_machine.load_player("Saves/Player.arpg");
+		display.initialize_player(player);
 	}
 
-	void Control::InitializeWorld()
+	////////////////////////////////////////////////////////////
+	void Control::initialize_world()
 	{
-		this->world = saveMachine.loadWorld("Saves/World.arpg");
-		display.InitializeWorld(world);
+		this->world = save_machine.load_world("Saves/World.arpg");
+		display.initialize_world(world);
 	}
 
-	void Control::Loop()
+	////////////////////////////////////////////////////////////
+	void Control::loop()
 	{
 		while (playing)
 		{
-			display.TickReset(player);
+			display.tick_reset(player);
 
-			game.Run(player, world);
+			game.update(player, world);
 
-			display.DrawTick(player, world);
+			display.draw_tick(player, world);
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				playing = false;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
 			{
-				reload = true;
+				new_world_gen = true;
 				break;
 			}
 
 		}
 	}
 
-	void Control::Reload()
+	////////////////////////////////////////////////////////////
+	void Control::reload()
 	{
 		this->player = Player(
 			"Player", -1, sf::Vector2f(100.0f, 100.0f),
 			sf::IntRect(1, 1, 50, 50),
 			100.0f, 100.0f
 		);
-		display.InitializePlayer(player);
+		display.initialize_player(player);
 
 		std::unordered_map<int, WorldObject> worldMap;
 		std::unordered_set<int> collID;
@@ -63,41 +81,44 @@ namespace rpg {
 			sf::IntRect(52, 52, 50, 50)
 		);
 		ObjectDisperse i(ironBox, sf::Vector2f(1000, 1000), 1.0f);
-		ID = i.Disperse(ID, worldMap, collID);
+		ID = i.disperse(ID, worldMap, collID);
 
 		WorldObject box(
 			"Box", 00, sf::Vector2f(0.0f, 0.0f),
 			sf::IntRect(52, 1, 50, 50)
 		);
 		ObjectDisperse b(box, sf::Vector2f(1000, 1000), 0.5f);
-		ID = b.Disperse(ID, worldMap, collID);
+		ID = b.disperse(ID, worldMap, collID);
 
 		this->world = World(sf::Vector2f(0.0f, 0.0f),
 			sf::IntRect(1, 52, 50, 50), worldMap, collID);
-		display.InitializeWorld(world);
+		display.initialize_world(world);
 	}
 
-	void Control::Save()
+	////////////////////////////////////////////////////////////
+	void Control::save()
 	{
-		saveMachine.savePlayer("Saves/Player.arpg", this->player);
-		saveMachine.saveWorld("Saves/World.arpg", this->world);
+		save_machine.save_player("Saves/Player.arpg", this->player);
+		save_machine.save_world("Saves/World.arpg", this->world);
 	}
 
-	void Control::Play()
+	////////////////////////////////////////////////////////////
+	void Control::play()
 	{
-		InitializePlayer();
-		InitializeWorld();
+		initialize_player();
+		initialize_world();
 
 		while (playing)
 		{
-			Loop();
-			if (reload)
+			loop();
+			if (new_world_gen)
 			{
 				sf::sleep(sf::Time(sf::seconds(0.25f)));
-				Reload();
+				reload();
 			}
 		}
-		display.Close();
-		Save();
+		display.close();
+		save();
 	}
-}
+
+} // namespace rpg

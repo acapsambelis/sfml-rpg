@@ -1,59 +1,72 @@
-#include "Displayable.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "Displayable.hpp"
 
 namespace rpg {
-
+	
+	////////////////////////////////////////////////////////////
 	Displayable::Displayable()
 	{
 	}
 
-	Displayable::Displayable(sf::IntRect rect, sf::Vector2f position)
+	////////////////////////////////////////////////////////////
+	Displayable::Displayable(sf::IntRect texture_rect, sf::Vector2f position)
 	{
-		this->rect = rect;
-		this->spr.setTextureRect(rect);
+		this->texture_rect = texture_rect;
+		this->spr.setTextureRect(this->texture_rect);
 		this->spr.setPosition(position);
 	}
 
-	Displayable::Displayable(const Displayable& cpy, sf::Vector2f position)
+	////////////////////////////////////////////////////////////
+	Displayable::Displayable(const Displayable& copy, sf::Vector2f position)
 	{
-		this->rect = cpy.rect;
-		this->spr.setTextureRect(this->rect);
+		this->texture_rect = copy.texture_rect;
+		this->spr.setTextureRect(this->texture_rect);
 		this->spr.setPosition(position);
 	}
 
+	////////////////////////////////////////////////////////////
 	Displayable::~Displayable()
 	{
 	}
 
-	void Displayable::SetSprite(sf::Texture& text)
+	////////////////////////////////////////////////////////////
+	void Displayable::set_sprite(sf::Texture& text)
 	{
 		this->spr.setTexture(text);
-		this->spr.setTextureRect(this->rect);
-		this->spr.setOrigin(getSprBodySize().x / 2, getSprBodySize().y / 2);
+		this->spr.setTextureRect(this->texture_rect);
+		this->spr.setOrigin(get_size().x / 2, get_size().y / 2);
 	}
 
-	void Displayable::SetScale(float xScale, float yScale)
+	////////////////////////////////////////////////////////////
+	void Displayable::set_scale(float x_scale, float y_scale)
 	{
-		spr.setScale(xScale, yScale);
+		spr.setScale(x_scale, y_scale);
 	}
 
-	bool Displayable::inView(sf::View view, Displayable* obj)
+	////////////////////////////////////////////////////////////
+	bool Displayable::in_view(sf::View view, Displayable* obj)
 	{
 		sf::Vector2f size = view.getSize();
 		sf::Vector2f center = view.getCenter();
-		if (getPosition().x + getSprBodySize().x > center.x - size.x / 2.0f &&
-			getPosition().x - getSprBodySize().x < center.x + size.x / 2.0f &&
-			getPosition().y + getSprBodySize().y > center.y - size.y / 2.0f &&
-			getPosition().y - getSprBodySize().y < center.y + size.y / 2.0f)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return (get_position().x + get_size().x > center.x - size.x / 2.0f &&
+				get_position().x - get_size().x < center.x + size.x / 2.0f &&
+				get_position().y + get_size().y > center.y - size.y / 2.0f &&
+				get_position().y - get_size().y < center.y + size.y / 2.0f);
 	}
 
-	void Displayable::Move(float dx, float dy)
+	////////////////////////////////////////////////////////////
+	void Displayable::move(float dx, float dy)
 	{
 		if (dx != 0.0 || dy != 0.0)
 		{
@@ -61,14 +74,14 @@ namespace rpg {
 		}
 	}
 
-	void Displayable::Draw(sf::RenderWindow& window, sf::View vw)
+	////////////////////////////////////////////////////////////
+	void Displayable::draw(sf::RenderWindow& window, sf::View vw)
 	{
-		if (inView(vw, this))
-		{
-			window.draw(spr);
-		}
+		draw(window, in_view(vw, this));
 	}
-	void Displayable::Draw(sf::RenderWindow& window, sf::View vw, bool force)
+
+	////////////////////////////////////////////////////////////
+	void Displayable::draw(sf::RenderWindow& window, bool force)
 	{
 		if (force)
 		{
@@ -76,10 +89,12 @@ namespace rpg {
 		}
 	}
 
+	////////////////////////////////////////////////////////////
 	std::string Displayable::GetWriteable()
 	{
-		return std::to_string(getPosition().x) + "," + std::to_string(getPosition().y) + '\n' +
-			std::to_string(getRect().left) + ',' + std::to_string(getRect().top) + ',' +
-			std::to_string(getRect().width) + ',' + std::to_string(getRect().height);
+		return std::to_string(get_position().x) + "," + std::to_string(get_position().y) + '\n' +
+			std::to_string(get_rect().left) + ',' + std::to_string(get_rect().top) + ',' +
+			std::to_string(get_rect().width) + ',' + std::to_string(get_rect().height);
 	}
-}
+
+} // namespace rpg

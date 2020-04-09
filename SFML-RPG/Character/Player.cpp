@@ -1,58 +1,70 @@
-#include "Player.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
 
-#include <iostream>
-#include <string>
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "Player.hpp"
+
 #include <vector>
 
 #include <SFML\Graphics.hpp>
 
 namespace rpg {
 
+	////////////////////////////////////////////////////////////
 	Player::Player()
 	{
 	}
 
+	////////////////////////////////////////////////////////////
 	Player::Player(
-		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-		/*Texture*/ sf::IntRect rect,
-		/*Character*/ float health, float speed
+		std::string name, int ID, sf::Vector2f position,
+		sf::IntRect texture_rect,
+		float health, float speed
 	) :
 		Character(name, ID, position,
-			rect,
+			texture_rect,
 			health, speed)
 	{
 	}
 
-	Player::Player(const Player& cpy, int ID, sf::Vector2f position) :
-		Character(cpy, ID, position)
+	////////////////////////////////////////////////////////////
+	Player::Player(const Player& copy, int id, sf::Vector2f position) :
+		Character(copy, id, position)
 	{
 	}
 
+	////////////////////////////////////////////////////////////
 	Player::~Player()
 	{
 	}
 
-	bool Player::Collide(WorldObject& other)
+	////////////////////////////////////////////////////////////
+	std::string Player::get_writable()
 	{
-		bool coll = UpdateCollision(other);
-		if (coll && getState() == 2)
+		return Character::get_writeable();
+	}
+
+	////////////////////////////////////////////////////////////
+	bool Player::collide(WorldObject& other)
+	{
+		bool coll = update_collision(other);
+		if (coll && get_state() == 2)
 		{
-			if (getHealth() > 0)
+			if (get_health() > 0)
 			{
-				Mine(other);
+				this->damage(10.0f);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	void Player::Mine(WorldObject& other)
-	{
-		this->Damage(10.0f);
-	}
-
-	std::string Player::GetWriteable()
-	{
-		return Character::GetWriteable();
-	}
-}
+} // namespace rpg

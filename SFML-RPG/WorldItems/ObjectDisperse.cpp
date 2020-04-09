@@ -1,63 +1,64 @@
-#include "ObjectDisperse.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "ObjectDisperse.hpp"
 
 namespace rpg {
 
-	ObjectDisperse::ObjectDisperse(WorldObject obj, sf::Vector2f range, float num) :
-		objType(obj)
+	////////////////////////////////////////////////////////////
+	ObjectDisperse::ObjectDisperse(WorldObject obj, sf::Vector2f range, float popularity) :
+		obj_reference(obj)
 	{
 		this->range = range;
-		this->popularity = num;
-		srand(time(0));
+		this->popularity = popularity;
+		srand((unsigned int)time(0));
 	}
 
+	////////////////////////////////////////////////////////////
 	ObjectDisperse::~ObjectDisperse()
 	{
 	}
 
-	int ObjectDisperse::Disperse(int nextID,
+	////////////////////////////////////////////////////////////
+	int ObjectDisperse::disperse(int next_id,
+		std::unordered_map<int, WorldObject>& map)
+	{
+		std::unordered_set<int> empty;
+		return disperse(next_id, map, empty);
+	}
+
+	////////////////////////////////////////////////////////////
+	int ObjectDisperse::disperse(int next_id,
 		std::unordered_map<int, WorldObject>& map,
 		std::unordered_set<int>& set)
 	{
-
-		for (int i = (int)-(this->range.x / 2.0f); i < this->range.x;
-			i = i + this->objType.getSprBodySize().x)
+		for (float x = -(this->range.x / 2.0f); x < this->range.x;
+			x = x + this->obj_reference.get_size().x)
 		{
-			for (int j = (int)-(this->range.y / 2.0f); j < this->range.y;
-				j = j + this->objType.getSprBodySize().y)
+			for (float y = -(this->range.y / 2.0f); y < this->range.y;
+				y = y + this->obj_reference.get_size().y)
 			{
 				float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 				if (r < this->popularity * 0.1f)
 				{
-					WorldObject nw = WorldObject(this->objType, nextID,
-						sf::Vector2f(float(i), float(j)));
-					map[nextID] = nw;
-					set.insert(nextID);
-					nextID++;
+					WorldObject nw = WorldObject(this->obj_reference, next_id,
+						sf::Vector2f(float(x), float(y)));
+					map[next_id] = nw;
+					set.insert(next_id);
+					next_id++;
 				}
 			}
 		}
-		return nextID;
+		return next_id;
 	}
-	int ObjectDisperse::Disperse(int nextID,
-		std::unordered_map<int, WorldObject>& map)
-	{
 
-		for (int i = (int)-(this->range.x / 2.0f); i < this->range.x;
-			i = i + this->objType.getSprBodySize().x)
-		{
-			for (int j = (int)-(this->range.y / 2.0f); j < this->range.y;
-				j = j + this->objType.getSprBodySize().y)
-			{
-				float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-				if (r < this->popularity * 0.1f)
-				{
-					WorldObject nw = WorldObject(this->objType, nextID,
-						sf::Vector2f(float(i), float(j)));
-					map[nextID] = nw;
-					nextID++;
-				}
-			}
-		}
-		return nextID;
-	}
-}
+} // namespace rpg

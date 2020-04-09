@@ -160,17 +160,17 @@
     <ClCompile Include="WorldItems\WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character\Character.h" />
-    <ClInclude Include="Control\Control.h" />
-    <ClInclude Include="Control\Logic\Game.h" />
-    <ClInclude Include="Control\Graphics\Gui.h" />
-    <ClInclude Include="Control\Graphics\Display.h" />
-    <ClInclude Include="Control\SaveMachine.h" />
-    <ClInclude Include="WorldItems\Displayable.h" />
-    <ClInclude Include="WorldItems\ObjectDisperse.h" />
-    <ClInclude Include="Character\Player.h" />
-    <ClInclude Include="WorldItems\World.h" />
-    <ClInclude Include="WorldItems\WorldObject.h" />
+    <ClInclude Include="Character\Character.hpp" />
+    <ClInclude Include="Control\Control.hpp" />
+    <ClInclude Include="Control\Logic\Game.hpp" />
+    <ClInclude Include="Control\Graphics\Gui.hpp" />
+    <ClInclude Include="Control\Graphics\Display.hpp" />
+    <ClInclude Include="Control\SaveMachine.hpp" />
+    <ClInclude Include="WorldItems\Displayable.hpp" />
+    <ClInclude Include="WorldItems\ObjectDisperse.hpp" />
+    <ClInclude Include="Character\Player.hpp" />
+    <ClInclude Include="WorldItems\World.hpp" />
+    <ClInclude Include="WorldItems\WorldObject.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\atlas.png" />

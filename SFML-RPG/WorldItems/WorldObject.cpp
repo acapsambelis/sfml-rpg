@@ -1,64 +1,82 @@
-#include "WorldObject.h"
+////////////////////////////////////////////////////////////
+//
+// SFML-RPG - A top-down RPG demo
+// 
+// Author - Alex Capsambelis
+//
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include "WorldObject.hpp"
 
 namespace rpg {
 
+	////////////////////////////////////////////////////////////
 	WorldObject::WorldObject() :
 		Displayable()
 	{
-		this->ID = 0;
+		this->id = 0;
 		this->name = "";
 	}
 
-	// NEW //
+	////////////////////////////////////////////////////////////
 	WorldObject::WorldObject(
-		/*Metadata*/ std::string name, int ID, sf::Vector2f position,
-		/*Textures*/ sf::IntRect rect
+		std::string name, int id, sf::Vector2f position,
+		sf::IntRect rect
 	) :
 		Displayable(rect, position)
 	{
-		this->ID = ID;
+		this->id = id;
 		this->name = name;
 	}
 
-	// COPY //
-	WorldObject::WorldObject(const WorldObject& cpy, int ID,
+	////////////////////////////////////////////////////////////
+	WorldObject::WorldObject(const WorldObject& copy, int id,
 		sf::Vector2f position) :
-		Displayable(cpy, position)
+		Displayable(copy, position)
 	{
-		this->ID = ID;
-		this->name = cpy.name;
+		this->id = id;
+		this->name = copy.name;
 	}
 
+	////////////////////////////////////////////////////////////
 	WorldObject::~WorldObject()
 	{
 	}
 
+	////////////////////////////////////////////////////////////
 	bool WorldObject::operator==(const WorldObject& w) const
 	{
-		return (this->ID == w.ID);
+		return (this->id == w.id);
 	}
 
-	bool WorldObject::UpdateCollision(WorldObject& other)
+	////////////////////////////////////////////////////////////
+	bool WorldObject::update_collision(WorldObject& other)
 	{
-		sf::Vector3f collisionDir = this->CheckCollision(other);
+		sf::Vector3f collisionDir = this->check_collision(other);
 		if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
 		{
-			Bounce(other, collisionDir);
+			bounce(collisionDir);
 			return true;
 		}
 
 		return false;
 	}
 
-	std::string WorldObject::GetWriteable()
+	////////////////////////////////////////////////////////////
+	std::string WorldObject::get_writeable()
 	{
-		return name + '\n' + std::to_string(ID) + '\n' + Displayable::GetWriteable();
+		return name + '\n' + std::to_string(id) + '\n' + Displayable::GetWriteable();
 	}
 
-	sf::Vector3f WorldObject::CheckCollision(WorldObject other)
+	////////////////////////////////////////////////////////////
+	sf::Vector3f WorldObject::check_collision(WorldObject other)
 	{
-		sf::Vector2f delta = FindDelta(other);
-		sf::Vector2f intersect = FindIntersect(other, delta);
+		sf::Vector2f delta = find_delta(other);
+		sf::Vector2f intersect = find_intersect(other, delta);
 
 		if (intersect.x < 0.0f && intersect.y < 0.0f)
 		{
@@ -80,27 +98,30 @@ namespace rpg {
 		return sf::Vector3f(0.0f, 0.0f, 0.0f);
 	}
 
-	sf::Vector2f WorldObject::FindIntersect(WorldObject other, sf::Vector2f delta)
+	////////////////////////////////////////////////////////////
+	sf::Vector2f WorldObject::find_intersect(WorldObject other, sf::Vector2f delta)
 	{
-		sf::Vector2f otherHalfSize = (sf::Vector2f)other.getSize() / 2.0f;
-		sf::Vector2f thisHalfSize = (sf::Vector2f)getSize() / 2.0f;
+		sf::Vector2f otherHalfSize = (sf::Vector2f)other.get_size() / 2.0f;
+		sf::Vector2f thisHalfSize = (sf::Vector2f)get_size() / 2.0f;
 
 		return sf::Vector2f(abs(delta.x) - (otherHalfSize.x + thisHalfSize.x),
 			abs(delta.y) - (otherHalfSize.y + thisHalfSize.y));
 	}
 
-	sf::Vector2f WorldObject::FindDelta(WorldObject other)
+	////////////////////////////////////////////////////////////
+	sf::Vector2f WorldObject::find_delta(WorldObject other)
 	{
-		sf::Vector2f otherPosition = other.getPosition();
-		sf::Vector2f thisPosition = getPosition();
+		sf::Vector2f otherPosition = other.get_position();
+		sf::Vector2f thisPosition = get_position();
 
 		return sf::Vector2f(otherPosition.x - thisPosition.x,
 			otherPosition.y - thisPosition.y);
 	}
 
-	void WorldObject::Bounce(WorldObject& other, sf::Vector3f react)
+	////////////////////////////////////////////////////////////
+	void WorldObject::bounce(sf::Vector3f react)
 	{
-		this->Move(react.z * react.x, -react.z * react.y);
+		this->move(react.z * react.x, -react.z * react.y);
 	}
 
-}
+} // namespace rpg

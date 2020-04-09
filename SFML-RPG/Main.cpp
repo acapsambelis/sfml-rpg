@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 
-#include "Control/Control.h"
+#include "Control/Control.hpp"
 
 int main()
 {
-	rpg::Control main;
-	main.Play();
+	// Begin game
+	rpg::Control control;
+	control.play();
 
 	return 0;
 }
