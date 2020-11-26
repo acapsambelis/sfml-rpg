@@ -19,7 +19,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Character.hpp"
-#include "WorldItems\Block.hpp"
+#include "WorldItems\Observables\Block.hpp"
 
 namespace rpg {
 

@@ -153,12 +153,14 @@
     <ClCompile Include="Control\Graphics\Gui.cpp" />
     <ClCompile Include="Control\Graphics\Display.cpp" />
     <ClCompile Include="Control\SaveMachine.cpp" />
-    <ClCompile Include="WorldItems\Displayable.cpp" />
+    <ClCompile Include="WorldItems\Organization\Grid.cpp" />
+    <ClCompile Include="WorldItems\Organization\Square.cpp" />
+    <ClCompile Include="WorldItems\Observables\Displayable.cpp" />
     <ClCompile Include="WorldItems\Generation\Dispersal.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Character\Player.cpp" />
     <ClCompile Include="WorldItems\World.cpp" />
-    <ClCompile Include="WorldItems\Block.cpp" />
+    <ClCompile Include="WorldItems\Observables\Block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character\Character.hpp" />
@@ -167,11 +169,13 @@
     <ClInclude Include="Control\Graphics\Gui.hpp" />
     <ClInclude Include="Control\Graphics\Display.hpp" />
     <ClInclude Include="Control\SaveMachine.hpp" />
-    <ClInclude Include="WorldItems\Displayable.hpp" />
+    <ClInclude Include="WorldItems\Organization\Grid.hpp" />
+    <ClInclude Include="WorldItems\Organization\Square.hpp" />
+    <ClInclude Include="WorldItems\Observables\Displayable.hpp" />
     <ClInclude Include="WorldItems\Generation\Dispersal.hpp" />
     <ClInclude Include="Character\Player.hpp" />
     <ClInclude Include="WorldItems\World.hpp" />
-    <ClInclude Include="WorldItems\Block.hpp" />
+    <ClInclude Include="WorldItems\Observables\Block.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\atlas.png" />

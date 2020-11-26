@@ -24,9 +24,6 @@
     <ClCompile Include="WorldItems\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Control\Control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,16 +36,25 @@
     <ClCompile Include="Control\Logic\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldItems\Displayable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Control\SaveMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldItems\Block.cpp">
+    <ClCompile Include="WorldItems\Generation\Dispersal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldItems\Generation\Dispersal.cpp">
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldItems\Observables\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldItems\Observables\Displayable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldItems\Organization\Grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldItems\Organization\Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,16 +80,22 @@
     <ClInclude Include="Control\SaveMachine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\Displayable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WorldItems\World.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\Block.hpp">
+    <ClInclude Include="WorldItems\Generation\Dispersal.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\Generation\Dispersal.hpp">
+    <ClInclude Include="WorldItems\Observables\Block.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldItems\Observables\Displayable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldItems\Organization\Grid.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldItems\Organization\Square.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,8 +18,8 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "Displayable.hpp"
-#include "Block.hpp"
+#include "Observables\Displayable.hpp"
+#include "Observables\Block.hpp"
 
 namespace rpg {
 

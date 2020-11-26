@@ -15,7 +15,7 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "WorldItems\Block.hpp"
+#include "WorldItems\Observables\Block.hpp"
 
 namespace rpg {
 
