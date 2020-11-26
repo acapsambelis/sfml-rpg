@@ -15,7 +15,7 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "WorldItems\WorldObject.hpp"
+#include "WorldItems\Block.hpp"
 
 namespace rpg {
 
@@ -23,7 +23,7 @@ namespace rpg {
 	/// \brief Parent class of Players. Controls health/stats
 	///
 	////////////////////////////////////////////////////////////
-	class Character : public WorldObject
+	class Character : public Block
 	{
 	public:
 

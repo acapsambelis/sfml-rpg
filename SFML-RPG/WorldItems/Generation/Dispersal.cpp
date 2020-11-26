@@ -10,12 +10,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 
-#include "ObjectDisperse.hpp"
+#include "Dispersal.hpp"
 
 namespace rpg {
 
 	////////////////////////////////////////////////////////////
-	ObjectDisperse::ObjectDisperse(WorldObject obj, sf::Vector2f range, float popularity) :
+	Dispersal::Dispersal(Block obj, sf::Vector2f range, float popularity) :
 		obj_reference(obj)
 	{
 		this->range = range;
@@ -24,21 +24,21 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	ObjectDisperse::~ObjectDisperse()
+	Dispersal::~Dispersal()
 	{
 	}
 
 	////////////////////////////////////////////////////////////
-	int ObjectDisperse::disperse(int next_id,
-		std::unordered_map<int, WorldObject>& map)
+	int Dispersal::disperse(int next_id,
+		std::unordered_map<int, Block>& map)
 	{
 		std::unordered_set<int> empty;
 		return disperse(next_id, map, empty);
 	}
 
 	////////////////////////////////////////////////////////////
-	int ObjectDisperse::disperse(int next_id,
-		std::unordered_map<int, WorldObject>& map,
+	int Dispersal::disperse(int next_id,
+		std::unordered_map<int, Block>& map,
 		std::unordered_set<int>& set)
 	{
 		for (float x = -(this->range.x / 2.0f); x < this->range.x;
@@ -50,7 +50,7 @@ namespace rpg {
 				float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 				if (r < this->popularity * 0.1f)
 				{
-					WorldObject nw = WorldObject(this->obj_reference, next_id,
+					Block nw = Block(this->obj_reference, next_id,
 						sf::Vector2f(float(x), float(y)));
 					map[next_id] = nw;
 					set.insert(next_id);

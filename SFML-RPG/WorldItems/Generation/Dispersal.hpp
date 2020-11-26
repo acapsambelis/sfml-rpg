@@ -19,7 +19,7 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "WorldObject.hpp"
+#include "WorldItems\Block.hpp"
 
 namespace rpg {
 
@@ -27,7 +27,7 @@ namespace rpg {
 	/// \brief Randomly distributes WorldObjects in an area
 	///
 	////////////////////////////////////////////////////////////
-	class ObjectDisperse
+	class Dispersal
 	{
 	public:
 
@@ -41,13 +41,13 @@ namespace rpg {
 		/// \param popularity  Scalar for percent chance to copy
 		///
 		////////////////////////////////////////////////////////////
-		ObjectDisperse(WorldObject obj, sf::Vector2f range, float popularity);
+		Dispersal(Block obj, sf::Vector2f range, float popularity);
 
 		////////////////////////////////////////////////////////////
 		/// \brief Destructor
 		///
 		////////////////////////////////////////////////////////////
-		~ObjectDisperse();
+		~Dispersal();
 
 		////////////////////////////////////////////////////////////
 		/// \brief Populates the range with objects
@@ -59,7 +59,7 @@ namespace rpg {
 		///
 		////////////////////////////////////////////////////////////
 		int disperse(int next_id,
-			std::unordered_map<int, WorldObject>& map);
+			std::unordered_map<int, Block>& map);
 
 		////////////////////////////////////////////////////////////
 		/// \brief Populates the range with objects
@@ -75,7 +75,7 @@ namespace rpg {
 		///
 		////////////////////////////////////////////////////////////
 		int disperse(int next_id,
-			std::unordered_map<int, WorldObject>& map,
+			std::unordered_map<int, Block>& map,
 			std::unordered_set<int>& set);
 
 	private:
@@ -83,7 +83,7 @@ namespace rpg {
 		////////////////////////////////////////////////////////////
 		// Member data
 		////////////////////////////////////////////////////////////
-		WorldObject  obj_reference; ///< Object to be copied
+		Block  obj_reference; ///< Object to be copied
 		sf::Vector2f range;         ///< Area that will be populated
 		float        popularity;    ///< Scalar for how often object is copied
 	};

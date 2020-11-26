@@ -19,7 +19,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Displayable.hpp"
-#include "WorldObject.hpp"
+#include "Block.hpp"
 
 namespace rpg {
 
@@ -51,7 +51,7 @@ namespace rpg {
 		///
 		////////////////////////////////////////////////////////////
 		World(sf::Vector2f position, sf::IntRect texture_rect,
-			std::unordered_map<int, WorldObject> world_items,
+			std::unordered_map<int, Block> world_items,
 			std::unordered_set<int> collision_ids);
 
 		////////////////////////////////////////////////////////////
@@ -68,7 +68,7 @@ namespace rpg {
 		/// \return state
 		///
 		////////////////////////////////////////////////////////////
-		WorldObject& get_world_item(int id) { return world_items[id]; }
+		Block& get_world_item(int id) { return world_items[id]; }
 
 		////////////////////////////////////////////////////////////
 		/// \brief Return the world_item collection
@@ -76,7 +76,7 @@ namespace rpg {
 		/// \return world_item
 		///
 		////////////////////////////////////////////////////////////
-		std::unordered_map<int, WorldObject> get_world_items() { return world_items; }
+		std::unordered_map<int, Block> get_world_items() { return world_items; }
 
 		////////////////////////////////////////////////////////////
 		/// \brief Return the state of the character
@@ -101,7 +101,7 @@ namespace rpg {
 		/// \param object  to be added
 		///
 		////////////////////////////////////////////////////////////
-		void add_world_item(int id, WorldObject& object) { world_items[id] = object; }
+		void add_world_item(int id, Block& object) { world_items[id] = object; }
 
 		////////////////////////////////////////////////////////////
 		/// \brief Adds an id to collision_ids
@@ -141,7 +141,7 @@ namespace rpg {
 		////////////////////////////////////////////////////////////
 		// Member data
 		////////////////////////////////////////////////////////////
-		std::unordered_map<int, WorldObject> ///<
+		std::unordered_map<int, Block> ///<
 			world_items;					 ///< Map of WorldObject ids to WorldObjects
 		std::unordered_set<int>              ///<
 			collision_ids;                   ///< Set of ids from collideable WorldObjects

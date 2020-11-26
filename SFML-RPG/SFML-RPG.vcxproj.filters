@@ -21,13 +21,7 @@
     <ClCompile Include="Character\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldItems\ObjectDisperse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WorldItems\World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldItems\WorldObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
@@ -49,6 +43,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Control\SaveMachine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldItems\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldItems\Generation\Dispersal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,13 +77,13 @@
     <ClInclude Include="WorldItems\Displayable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\ObjectDisperse.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WorldItems\World.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldItems\WorldObject.hpp">
+    <ClInclude Include="WorldItems\Block.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldItems\Generation\Dispersal.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,6 +92,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ImageRec\atlas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ScreenShots\ApproachingBox.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ScreenShots\NewGeneration.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ScreenShots\BoxBroken.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ScreenShots\NewWorld.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

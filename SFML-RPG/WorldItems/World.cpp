@@ -22,7 +22,7 @@ namespace rpg {
 
 	////////////////////////////////////////////////////////////
 	World::World(sf::Vector2f position, sf::IntRect texture_rect,
-		std::unordered_map<int, WorldObject> world_items,
+		std::unordered_map<int, Block> world_items,
 		std::unordered_set<int> collision_ids) :
 		Displayable(texture_rect, position)
 	{
@@ -50,7 +50,7 @@ namespace rpg {
 		std::string write = Displayable::GetWriteable();
 		write += "\n-.";
 
-		std::unordered_map<int, WorldObject>::iterator it = world_items.begin();
+		std::unordered_map<int, Block>::iterator it = world_items.begin();
 
 		while (it != world_items.end())
 		{

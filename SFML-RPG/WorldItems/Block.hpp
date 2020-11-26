@@ -6,8 +6,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef SFML_RPG_WORLDOBJECT
-#define SFML_RPG_WORLDOBJECT
+#ifndef SFML_RPG_BLOCK
+#define SFML_RPG_BLOCK
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -23,7 +23,7 @@ namespace rpg {
 	/// \brief Interactable object found in a World
 	///
 	////////////////////////////////////////////////////////////
-	class WorldObject : public Displayable
+	class Block : public Displayable
 	{
 	public:
 
@@ -33,7 +33,7 @@ namespace rpg {
 		/// Creates an empty WorldObject.
 		///
 		////////////////////////////////////////////////////////////
-		WorldObject();
+		Block();
 
 		////////////////////////////////////////////////////////////
 		/// \brief Construct the WorldObject
@@ -46,7 +46,7 @@ namespace rpg {
 		/// \param texture_rect  Displayable rectangle for texture
 		///
 		////////////////////////////////////////////////////////////
-		WorldObject(
+		Block(
 			std::string name, int id, sf::Vector2f position,
 			sf::IntRect texture_rect
 		);
@@ -59,13 +59,13 @@ namespace rpg {
 		/// \param position new instance position
 		///
 		////////////////////////////////////////////////////////////
-		WorldObject(const WorldObject& copy, int id, sf::Vector2f position);
+		Block(const Block& copy, int id, sf::Vector2f position);
 
 		////////////////////////////////////////////////////////////
 		/// \brief Destructor
 		///
 		////////////////////////////////////////////////////////////
-		~WorldObject();
+		~Block();
 
 		////////////////////////////////////////////////////////////
 		/// \brief Return the name of the WorldObject
@@ -99,7 +99,7 @@ namespace rpg {
 		/// \return if two WorldObjects are equal
 		///
 		////////////////////////////////////////////////////////////
-		bool operator==(const WorldObject& w) const;
+		bool operator==(const Block& w) const;
 
 		////////////////////////////////////////////////////////////
 		/// \brief Collides two objects
@@ -109,7 +109,7 @@ namespace rpg {
 		/// \return if the objects collided
 		///
 		////////////////////////////////////////////////////////////
-		bool update_collision(WorldObject& other);
+		bool update_collision(Block& other);
 
 	private:
 
@@ -122,7 +122,7 @@ namespace rpg {
 		///		in which the objects are overlapping
 		///
 		////////////////////////////////////////////////////////////
-		sf::Vector3f check_collision(WorldObject other);
+		sf::Vector3f check_collision(Block other);
 
 		////////////////////////////////////////////////////////////
 		/// \brief Finds the x and y amounts of overlap between two objects
@@ -133,7 +133,7 @@ namespace rpg {
 		/// \return overlap
 		///
 		////////////////////////////////////////////////////////////
-		sf::Vector2f find_intersect(WorldObject other, sf::Vector2f delta);
+		sf::Vector2f find_intersect(Block other, sf::Vector2f delta);
 		
 		////////////////////////////////////////////////////////////
 		/// \brief Finds x and y distance between
@@ -143,7 +143,7 @@ namespace rpg {
 		/// \return vector with distance between centers of WorldObjects
 		///
 		////////////////////////////////////////////////////////////
-		sf::Vector2f find_delta(WorldObject other);
+		sf::Vector2f find_delta(Block other);
 
 		////////////////////////////////////////////////////////////
 		/// \brief Moves this by react.z in react.x, react.y direction

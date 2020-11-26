@@ -101,9 +101,9 @@ namespace rpg {
 		std::vector<std::string> posTokens;
 		std::string rect;
 		std::vector<std::string> rectTokens;
-		WorldObject obj;
+		Block obj;
 
-		std::unordered_map<int, WorldObject> worldItems;
+		std::unordered_map<int, Block> worldItems;
 
 		in >> x;
 		do {
@@ -116,7 +116,7 @@ namespace rpg {
 				in >> rect;
 				rectTokens = split(rect, ',');
 
-				obj = WorldObject(name, std::stoi(id), sf::Vector2f(std::stof(posTokens[0]), std::stof(posTokens[1])),
+				obj = Block(name, std::stoi(id), sf::Vector2f(std::stof(posTokens[0]), std::stof(posTokens[1])),
 					sf::IntRect(std::stoi(rectTokens[0]), std::stoi(rectTokens[1]),
 						std::stoi(rectTokens[2]), std::stoi(rectTokens[3])));
 

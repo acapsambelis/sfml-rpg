@@ -10,12 +10,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 
-#include "WorldObject.hpp"
+#include "Block.hpp"
 
 namespace rpg {
 
 	////////////////////////////////////////////////////////////
-	WorldObject::WorldObject() :
+	Block::Block() :
 		Displayable()
 	{
 		this->id = 0;
@@ -23,7 +23,7 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	WorldObject::WorldObject(
+	Block::Block(
 		std::string name, int id, sf::Vector2f position,
 		sf::IntRect rect
 	) :
@@ -34,7 +34,7 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	WorldObject::WorldObject(const WorldObject& copy, int id,
+	Block::Block(const Block& copy, int id,
 		sf::Vector2f position) :
 		Displayable(copy, position)
 	{
@@ -43,18 +43,18 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	WorldObject::~WorldObject()
+	Block::~Block()
 	{
 	}
 
 	////////////////////////////////////////////////////////////
-	bool WorldObject::operator==(const WorldObject& w) const
+	bool Block::operator==(const Block& w) const
 	{
 		return (this->id == w.id);
 	}
 
 	////////////////////////////////////////////////////////////
-	bool WorldObject::update_collision(WorldObject& other)
+	bool Block::update_collision(Block& other)
 	{
 		sf::Vector3f collisionDir = this->check_collision(other);
 		if (collisionDir != sf::Vector3f(0.0f, 0.0f, 0.0f))
@@ -67,13 +67,13 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	std::string WorldObject::get_writeable()
+	std::string Block::get_writeable()
 	{
 		return name + '\n' + std::to_string(id) + '\n' + Displayable::GetWriteable();
 	}
 
 	////////////////////////////////////////////////////////////
-	sf::Vector3f WorldObject::check_collision(WorldObject other)
+	sf::Vector3f Block::check_collision(Block other)
 	{
 		sf::Vector2f delta = find_delta(other);
 		sf::Vector2f intersect = find_intersect(other, delta);
@@ -99,7 +99,7 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	sf::Vector2f WorldObject::find_intersect(WorldObject other, sf::Vector2f delta)
+	sf::Vector2f Block::find_intersect(Block other, sf::Vector2f delta)
 	{
 		sf::Vector2f otherHalfSize = (sf::Vector2f)other.get_size() / 2.0f;
 		sf::Vector2f thisHalfSize = (sf::Vector2f)get_size() / 2.0f;
@@ -109,7 +109,7 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	sf::Vector2f WorldObject::find_delta(WorldObject other)
+	sf::Vector2f Block::find_delta(Block other)
 	{
 		sf::Vector2f otherPosition = other.get_position();
 		sf::Vector2f thisPosition = get_position();
@@ -119,7 +119,7 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	void WorldObject::bounce(sf::Vector3f react)
+	void Block::bounce(sf::Vector3f react)
 	{
 		this->move(react.z * react.x, -react.z * react.y);
 	}

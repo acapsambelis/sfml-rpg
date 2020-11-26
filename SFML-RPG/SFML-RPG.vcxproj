@@ -154,11 +154,11 @@
     <ClCompile Include="Control\Graphics\Display.cpp" />
     <ClCompile Include="Control\SaveMachine.cpp" />
     <ClCompile Include="WorldItems\Displayable.cpp" />
-    <ClCompile Include="WorldItems\ObjectDisperse.cpp" />
+    <ClCompile Include="WorldItems\Generation\Dispersal.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Character\Player.cpp" />
     <ClCompile Include="WorldItems\World.cpp" />
-    <ClCompile Include="WorldItems\WorldObject.cpp" />
+    <ClCompile Include="WorldItems\Block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character\Character.hpp" />
@@ -168,14 +168,18 @@
     <ClInclude Include="Control\Graphics\Display.hpp" />
     <ClInclude Include="Control\SaveMachine.hpp" />
     <ClInclude Include="WorldItems\Displayable.hpp" />
-    <ClInclude Include="WorldItems\ObjectDisperse.hpp" />
+    <ClInclude Include="WorldItems\Generation\Dispersal.hpp" />
     <ClInclude Include="Character\Player.hpp" />
     <ClInclude Include="WorldItems\World.hpp" />
-    <ClInclude Include="WorldItems\WorldObject.hpp" />
+    <ClInclude Include="WorldItems\Block.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ImageRec\atlas.png" />
     <Image Include="ImageRec\slime.jpg" />
+    <Image Include="ScreenShots\ApproachingBox.png" />
+    <Image Include="ScreenShots\BoxBroken.png" />
+    <Image Include="ScreenShots\NewGeneration.png" />
+    <Image Include="ScreenShots\NewWorld.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Saves\PlayerBackup.arpg" />

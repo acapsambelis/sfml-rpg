@@ -18,8 +18,8 @@
 #include "SaveMachine.hpp"
 #include "Character\Player.hpp"
 #include "WorldItems\World.hpp"
-#include "WorldItems\WorldObject.hpp"
-#include "WorldItems\ObjectDisperse.hpp"
+#include "WorldItems\Block.hpp"
+#include "WorldItems\Generation\Dispersal.hpp"
 
 namespace rpg {
 

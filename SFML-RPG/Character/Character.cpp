@@ -28,7 +28,7 @@ namespace rpg {
 		sf::IntRect texture_rect,
 		float health, float speed
 	) :
-		WorldObject(name, id, position,
+		Block(name, id, position,
 			texture_rect)
 	{
 		this->health = health;
@@ -38,7 +38,7 @@ namespace rpg {
 
 	////////////////////////////////////////////////////////////
 	Character::Character(const Character& copy, int id, sf::Vector2f position) :
-		WorldObject(copy, id, position)
+		Block(copy, id, position)
 	{
 		this->health = copy.health;
 		this->speed = copy.speed;
@@ -53,7 +53,7 @@ namespace rpg {
 	////////////////////////////////////////////////////////////
 	std::string Character::get_writeable()
 	{
-		return WorldObject::get_writeable() 
+		return Block::get_writeable() 
 			+ '\n' + std::to_string(health) 
 			+ '\n' + std::to_string(speed);
 	}

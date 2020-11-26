@@ -72,22 +72,22 @@ namespace rpg {
 		);
 		display.initialize_player(player);
 
-		std::unordered_map<int, WorldObject> worldMap;
+		std::unordered_map<int, Block> worldMap;
 		std::unordered_set<int> collID;
 
 		int ID = 0;
-		WorldObject ironBox(
+		Block ironBox(
 			"IronBox", 00, sf::Vector2f(0.0f, 0.0f),
 			sf::IntRect(52, 52, 50, 50)
 		);
-		ObjectDisperse i(ironBox, sf::Vector2f(1000, 1000), 1.0f);
+		Dispersal i(ironBox, sf::Vector2f(1000, 1000), 1.0f);
 		ID = i.disperse(ID, worldMap, collID);
 
-		WorldObject box(
+		Block box(
 			"Box", 00, sf::Vector2f(0.0f, 0.0f),
 			sf::IntRect(52, 1, 50, 50)
 		);
-		ObjectDisperse b(box, sf::Vector2f(1000, 1000), 0.5f);
+		Dispersal b(box, sf::Vector2f(1000, 1000), 0.5f);
 		ID = b.disperse(ID, worldMap, collID);
 
 		this->world = World(sf::Vector2f(0.0f, 0.0f),

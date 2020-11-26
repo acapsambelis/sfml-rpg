@@ -19,7 +19,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Character.hpp"
-#include "WorldItems\WorldObject.hpp"
+#include "WorldItems\Block.hpp"
 
 namespace rpg {
 
@@ -93,7 +93,7 @@ namespace rpg {
 		/// \return bool if the player mined the other or not
 		///
 		////////////////////////////////////////////////////////////
-		bool collide(WorldObject& other);
+		bool collide(Block& other);
 	};
 
 } // namespace rpg

@@ -53,7 +53,7 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	bool Player::collide(WorldObject& other)
+	bool Player::collide(Block& other)
 	{
 		bool coll = update_collision(other);
 		if (coll && get_state() == 2)
