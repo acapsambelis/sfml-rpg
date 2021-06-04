@@ -61,23 +61,6 @@ namespace rpg {
 		int disperse(int next_id,
 			std::unordered_map<int, Block>& map);
 
-		////////////////////////////////////////////////////////////
-		/// \brief Populates the range with objects
-		///
-		/// Adds each object to the map, but also adds the ids
-		/// to be stored for use in collisions
-		///
-		/// \param next_id Id to start using for next copy
-		/// \param map     Map to add copies to
-		/// \param set     Set to add collideable ids to
-		///
-		/// \return the next id to be added
-		///
-		////////////////////////////////////////////////////////////
-		int disperse(int next_id,
-			std::unordered_map<int, Block>& map,
-			std::unordered_set<int>& set);
-
 	private:
 
 		////////////////////////////////////////////////////////////

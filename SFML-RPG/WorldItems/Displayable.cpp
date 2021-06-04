@@ -89,12 +89,4 @@ namespace rpg {
 		}
 	}
 
-	////////////////////////////////////////////////////////////
-	std::string Displayable::GetWriteable()
-	{
-		return std::to_string(get_position().x) + "," + std::to_string(get_position().y) + '\n' +
-			std::to_string(get_rect().left) + ',' + std::to_string(get_rect().top) + ',' +
-			std::to_string(get_rect().width) + ',' + std::to_string(get_rect().height);
-	}
-
 } // namespace rpg

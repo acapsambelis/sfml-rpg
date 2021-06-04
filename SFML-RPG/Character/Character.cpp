@@ -50,12 +50,5 @@ namespace rpg {
 	{
 	}
 
-	////////////////////////////////////////////////////////////
-	std::string Character::get_writeable()
-	{
-		return Block::get_writeable() 
-			+ '\n' + std::to_string(health) 
-			+ '\n' + std::to_string(speed);
-	}
 
 } // namespace rpg

@@ -38,7 +38,7 @@ namespace rpg {
 	void Control::initialize_world()
 	{
 		this->world = World(sf::Vector2f(0.0f, 0.0f), sf::IntRect(1, 52, 50, 50),
-			std::unordered_map<int, Block>(), std::unordered_set<int>());
+			std::unordered_map<int, Block>());
 		display.initialize_world(world);
 	}
 
@@ -75,7 +75,6 @@ namespace rpg {
 		display.initialize_player(player);
 
 		std::unordered_map<int, Block> worldMap;
-		std::unordered_set<int> collID;
 
 		int ID = 0;
 		Block ironBox(
@@ -83,17 +82,17 @@ namespace rpg {
 			sf::IntRect(52, 52, 50, 50)
 		);
 		Dispersal i(ironBox, sf::Vector2f(1000, 1000), 1.0f);
-		ID = i.disperse(ID, worldMap, collID);
+		ID = i.disperse(ID, worldMap);
 
 		Block box(
 			"Box", 00, sf::Vector2f(0.0f, 0.0f),
 			sf::IntRect(52, 1, 50, 50)
 		);
 		Dispersal b(box, sf::Vector2f(1000, 1000), 0.5f);
-		ID = b.disperse(ID, worldMap, collID);
+		ID = b.disperse(ID, worldMap);
 
 		this->world = World(sf::Vector2f(0.0f, 0.0f),
-			sf::IntRect(1, 52, 50, 50), worldMap, collID);
+			sf::IntRect(1, 52, 50, 50), worldMap);
 		display.initialize_world(world);
 	}
 

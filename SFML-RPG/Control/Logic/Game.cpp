@@ -39,12 +39,13 @@ namespace rpg {
 	void Game::collide(Player& player, World& world)
 	{
 		std::unordered_set<int> eraseIDs;
-		for (auto id : world.getCollID())
+		std::unordered_map<int, Block> items = world.get_world_items();
+		for (auto iter = items.begin(); iter != items.end(); ++iter)
 		{
-			bool mined = player.collide(world.get_world_item(id));
+			bool mined = player.collide(iter->second);
 			if (mined)
 			{
-				eraseIDs.insert(id);
+				eraseIDs.insert(iter->first);
 			}
 		}
 		for (int id : eraseIDs)

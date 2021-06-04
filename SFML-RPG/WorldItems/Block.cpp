@@ -67,12 +67,6 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	std::string Block::get_writeable()
-	{
-		return name + '\n' + std::to_string(id) + '\n' + Displayable::GetWriteable();
-	}
-
-	////////////////////////////////////////////////////////////
 	sf::Vector3f Block::check_collision(Block other)
 	{
 		sf::Vector2f delta = find_delta(other);

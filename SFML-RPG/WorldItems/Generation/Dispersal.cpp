@@ -32,15 +32,6 @@ namespace rpg {
 	int Dispersal::disperse(int next_id,
 		std::unordered_map<int, Block>& map)
 	{
-		std::unordered_set<int> empty;
-		return disperse(next_id, map, empty);
-	}
-
-	////////////////////////////////////////////////////////////
-	int Dispersal::disperse(int next_id,
-		std::unordered_map<int, Block>& map,
-		std::unordered_set<int>& set)
-	{
 		for (float x = -(this->range.x / 2.0f); x < this->range.x;
 			x = x + this->obj_reference.get_size().x)
 		{
@@ -53,7 +44,6 @@ namespace rpg {
 					Block nw = Block(this->obj_reference, next_id,
 						sf::Vector2f(float(x), float(y)));
 					map[next_id] = nw;
-					set.insert(next_id);
 					next_id++;
 				}
 			}

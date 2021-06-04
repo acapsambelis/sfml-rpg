@@ -51,8 +51,7 @@ namespace rpg {
 		///
 		////////////////////////////////////////////////////////////
 		World(sf::Vector2f position, sf::IntRect texture_rect,
-			std::unordered_map<int, Block> world_items,
-			std::unordered_set<int> collision_ids);
+			std::unordered_map<int, Block> world_items);
 
 		////////////////////////////////////////////////////////////
 		/// \brief Destructor
@@ -79,22 +78,6 @@ namespace rpg {
 		std::unordered_map<int, Block> get_world_items() { return world_items; }
 
 		////////////////////////////////////////////////////////////
-		/// \brief Return the state of the character
-		///
-		/// \return state
-		///
-		////////////////////////////////////////////////////////////
-		std::unordered_set<int> getCollID() { return collision_ids; }
-
-		////////////////////////////////////////////////////////////
-		/// \brief Return a saveable form of the world
-		///
-		/// \return string representation of world
-		///
-		////////////////////////////////////////////////////////////
-		std::string get_writeable();
-
-		////////////////////////////////////////////////////////////
 		/// \brief Adds a WorldObject to the world_items map
 		///
 		/// \param id      of object to be added
@@ -102,14 +85,6 @@ namespace rpg {
 		///
 		////////////////////////////////////////////////////////////
 		void add_world_item(int id, Block& object) { world_items[id] = object; }
-
-		////////////////////////////////////////////////////////////
-		/// \brief Adds an id to collision_ids
-		///
-		/// \param id to be added
-		///
-		////////////////////////////////////////////////////////////
-		void add_coll_id(int id) { collision_ids.insert(id); }
 
 		////////////////////////////////////////////////////////////
 		/// \brief Set the world_items' sprite's texture
@@ -130,8 +105,6 @@ namespace rpg {
 		////////////////////////////////////////////////////////////
 		void delete_world_item(int id) {
 			world_items.erase(id);
-			if (collision_ids.find(id) != collision_ids.end())
-				collision_ids.erase(id);
 		}
 
 	private:
@@ -141,10 +114,8 @@ namespace rpg {
 		////////////////////////////////////////////////////////////
 		// Member data
 		////////////////////////////////////////////////////////////
-		std::unordered_map<int, Block> ///<
-			world_items;					 ///< Map of WorldObject ids to WorldObjects
-		std::unordered_set<int>              ///<
-			collision_ids;                   ///< Set of ids from collideable WorldObjects
+		std::unordered_map<int, Block>	///<
+			world_items;				///< Map of WorldObject ids to WorldObjects
 	};
 
 } // namespace rpg

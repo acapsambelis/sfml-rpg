@@ -93,14 +93,6 @@ namespace rpg {
 		int get_state() { return state; }
 
 		////////////////////////////////////////////////////////////
-		/// \brief Return a saveable form of the character
-		///
-		/// \return string representation of character
-		///
-		////////////////////////////////////////////////////////////
-		std::string get_writeable();
-
-		////////////////////////////////////////////////////////////
 		/// \brief Damage the character
 		///
 		/// \param amount  value to subtract from health

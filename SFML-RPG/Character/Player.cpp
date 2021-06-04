@@ -47,12 +47,6 @@ namespace rpg {
 	}
 
 	////////////////////////////////////////////////////////////
-	std::string Player::get_writable()
-	{
-		return Character::get_writeable();
-	}
-
-	////////////////////////////////////////////////////////////
 	bool Player::collide(Block& other)
 	{
 		bool coll = update_collision(other);

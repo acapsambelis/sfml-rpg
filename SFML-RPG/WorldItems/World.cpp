@@ -22,12 +22,10 @@ namespace rpg {
 
 	////////////////////////////////////////////////////////////
 	World::World(sf::Vector2f position, sf::IntRect texture_rect,
-		std::unordered_map<int, Block> world_items,
-		std::unordered_set<int> collision_ids) :
+		std::unordered_map<int, Block> world_items) :
 		Displayable(texture_rect, position)
 	{
 		this->world_items = world_items;
-		this->collision_ids = collision_ids;
 	}
 
 	////////////////////////////////////////////////////////////
@@ -42,33 +40,6 @@ namespace rpg {
 		{
 			world_items[i].set_sprite(text);
 		}
-	}
-
-	////////////////////////////////////////////////////////////
-	std::string World::get_writeable()
-	{
-		std::string write = Displayable::GetWriteable();
-		write += "\n-.";
-
-		std::unordered_map<int, Block>::iterator it = world_items.begin();
-
-		while (it != world_items.end())
-		{
-			if (it->second.get_name().compare(""))
-			{
-				write += "\n";
-				write += it->second.get_writeable();
-				write += "\n-";
-			}
-			it++;
-		}
-		write += ".\n";
-
-		for (auto ID : collision_ids) {
-			write += std::to_string(ID) + ',';
-		}
-
-		return write;
 	}
 
 } // namespace rpg

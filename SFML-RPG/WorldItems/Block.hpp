@@ -84,14 +84,6 @@ namespace rpg {
 		int get_id() { return id; }
 
 		////////////////////////////////////////////////////////////
-		/// \brief Return a saveable form of the WorldObject
-		///
-		/// \return string representation of WorldObject
-		///
-		////////////////////////////////////////////////////////////
-		std::string get_writeable();
-
-		////////////////////////////////////////////////////////////
 		/// \brief Overload of == operator to use only id
 		///
 		/// \param other WorldObject to compare to this

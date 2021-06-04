@@ -74,14 +74,6 @@ namespace rpg {
 		~Player();
 
 		////////////////////////////////////////////////////////////
-		/// \brief Return a saveable form of the player
-		///
-		/// \return string representation of player
-		///
-		////////////////////////////////////////////////////////////
-		std::string get_writable();
-
-		////////////////////////////////////////////////////////////
 		/// \brief Collide the player with another object and mine
 		///
 		/// Collides the player.  If the player is in state 2,
