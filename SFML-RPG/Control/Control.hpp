@@ -15,7 +15,6 @@
 
 #include "Logic\Game.hpp"
 #include "Graphics\Display.hpp"
-#include "SaveMachine.hpp"
 #include "Character\Player.hpp"
 #include "WorldItems\World.hpp"
 #include "WorldItems\Block.hpp"
@@ -120,7 +119,6 @@ namespace rpg {
 		bool        new_world_gen; ///< Does the player request a new world
 		Player      player;        ///< Player for user to manipulate
 		World       world;         ///< World to interact with
-		SaveMachine save_machine;  ///< For saving/loading
 		Game        game;          ///< Runs input gathering and updating
 		Display     display;       ///< Abstracts away graphical changes
 	};

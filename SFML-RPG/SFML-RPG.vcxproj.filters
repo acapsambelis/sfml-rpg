@@ -42,9 +42,6 @@
     <ClCompile Include="WorldItems\Displayable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Control\SaveMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WorldItems\Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -69,9 +66,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Control\Control.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\SaveMachine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WorldItems\Displayable.hpp">

@@ -152,7 +152,6 @@
     <ClCompile Include="Control\Logic\Game.cpp" />
     <ClCompile Include="Control\Graphics\Gui.cpp" />
     <ClCompile Include="Control\Graphics\Display.cpp" />
-    <ClCompile Include="Control\SaveMachine.cpp" />
     <ClCompile Include="WorldItems\Displayable.cpp" />
     <ClCompile Include="WorldItems\Generation\Dispersal.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -166,7 +165,6 @@
     <ClInclude Include="Control\Logic\Game.hpp" />
     <ClInclude Include="Control\Graphics\Gui.hpp" />
     <ClInclude Include="Control\Graphics\Display.hpp" />
-    <ClInclude Include="Control\SaveMachine.hpp" />
     <ClInclude Include="WorldItems\Displayable.hpp" />
     <ClInclude Include="WorldItems\Generation\Dispersal.hpp" />
     <ClInclude Include="Character\Player.hpp" />

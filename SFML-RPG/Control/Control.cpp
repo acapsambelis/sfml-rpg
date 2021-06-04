@@ -29,14 +29,16 @@ namespace rpg {
 	////////////////////////////////////////////////////////////
 	void Control::initialize_player()
 	{
-		this->player = save_machine.load_player("Saves/Player.arpg");
+		this->player = Player("Player", -1, sf::Vector2f(100.0f, 100.0f),
+			sf::IntRect(1, 1, 50, 50), 100.0f, 100.0f);
 		display.initialize_player(player);
 	}
 
 	////////////////////////////////////////////////////////////
 	void Control::initialize_world()
 	{
-		this->world = save_machine.load_world("Saves/World.arpg");
+		this->world = World(sf::Vector2f(0.0f, 0.0f), sf::IntRect(1, 52, 50, 50),
+			std::unordered_map<int, Block>(), std::unordered_set<int>());
 		display.initialize_world(world);
 	}
 
@@ -98,8 +100,8 @@ namespace rpg {
 	////////////////////////////////////////////////////////////
 	void Control::save()
 	{
-		save_machine.save_player("Saves/Player.arpg", this->player);
-		save_machine.save_world("Saves/World.arpg", this->world);
+		//save_machine.save_player("Saves/Player.arpg", this->player);
+		//save_machine.save_world("Saves/World.arpg", this->world);
 	}
 
 	////////////////////////////////////////////////////////////
@@ -107,6 +109,8 @@ namespace rpg {
 	{
 		initialize_player();
 		initialize_world();
+
+		reload();
 
 		while (playing)
 		{
